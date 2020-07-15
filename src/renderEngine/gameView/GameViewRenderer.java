@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL30;
 import models.data.ModelData;
 import renderEngine.models.RawModel;
 import renderEngine.models.Texture;
+import renderEngine.shaders.GameViewShader;
 import renderEngine.Loader;
 
 public class GameViewRenderer {

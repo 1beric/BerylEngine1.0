@@ -8,7 +8,9 @@ import game.components.Debugger;
 import game.components.FPSUpdater;
 import game.components.GUIHandler;
 import game.components.ObjectController;
+import game.components.PostProcessingHandler;
 import game.components.SkyAnimator;
+import guiSystem.animations.CustomAnimation;
 import guiSystem.elements.Mesh2RC;
 import models.components.BerylComponent;
 import models.components.renderable.BerylRC;
@@ -27,6 +29,7 @@ import renderEngine.postProcessing.contrast.ContrastEffect;
 import renderEngine.postProcessing.gaussianBlur.CompoundGaussianBlur;
 import renderEngine.postProcessing.gaussianBlur.GaussianBlur;
 import renderEngine.postProcessing.gaussianBlur.HorizontalGaussianBlur;
+import tools.Interpolators;
 import tools.input.BerylMouse;
 import tools.interfaces.Updatable;
 import tools.math.BerylVector;
@@ -182,7 +185,7 @@ public class Scene implements Updatable {
 		new Debugger(new Entity("Debug Element", this));
 		
 		Entity ppes = new Entity("Post Processing Effects", this);
-		// none currently
+		new ContrastEffect(0.2f, ppes);
 		
 		Entity obj = new Entity("Object", this);
 		new ObjectController(obj);

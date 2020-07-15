@@ -1,4 +1,4 @@
-package renderEngine;
+package renderEngine.shaders;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -81,7 +81,6 @@ public abstract class ShaderProgram {
 		GL20.glDeleteProgram(programID);
 	}
 	
-
 	protected void bindAttribute(int attr, String variable) {
 		GL20.glBindAttribLocation(programID, attr, variable);
 	}

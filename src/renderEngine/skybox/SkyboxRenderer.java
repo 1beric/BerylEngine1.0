@@ -11,6 +11,7 @@ import models.data.ModelData;
 import renderEngine.Loader;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
+import renderEngine.shaders.SkyboxShader;
 import settings.Constants;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;

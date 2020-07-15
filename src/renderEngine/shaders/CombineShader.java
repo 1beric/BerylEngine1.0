@@ -1,13 +1,11 @@
-package renderEngine.postProcessing.bloom;
-
-import renderEngine.ShaderProgram;
+package renderEngine.shaders;
 
 public class CombineShader extends ShaderProgram {
 
-	private static final String VERTEX_FILE = "src/renderEngine/postProcessing/bloom/simpleVertex.glsl";
-	private static final String FRAGMENT_FILE = "src/renderEngine/postProcessing/bloom/combineFragment.glsl";
+	private static final String VERTEX_FILE = "src/renderEngine/shaders/simpleVertex.glsl";
+	private static final String FRAGMENT_FILE = "src/renderEngine/shaders/combineFragment.glsl";
 	
-	protected CombineShader() {
+	public CombineShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);
 	}
 	
@@ -18,7 +16,7 @@ public class CombineShader extends ShaderProgram {
 		addUniform("bloom");
 	}
 	
-	protected void connectTextureUnits() {
+	public void connectTextureUnits() {
 		super.loadInt(getUniform("colorTexture"), 0);
 		super.loadInt(getUniform("highlightTexture"), 1);
 	}

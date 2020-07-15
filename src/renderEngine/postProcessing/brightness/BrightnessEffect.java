@@ -1,9 +1,10 @@
 package renderEngine.postProcessing.brightness;
 
 import models.data.Entity;
-import renderEngine.ShaderProgram;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
+import renderEngine.shaders.BrightnessShader;
+import renderEngine.shaders.ShaderProgram;
 
 public class BrightnessEffect extends PostProcessingEffect {
 

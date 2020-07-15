@@ -20,6 +20,7 @@ import models.data.ModelDataType;
 import renderEngine.BerylGL;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
+import renderEngine.shaders.EntityShader;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;

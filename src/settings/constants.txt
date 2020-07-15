@@ -33,17 +33,6 @@ Vector3f,TERRAIN_SELECTED_COLOR,0.5,0.4,0.2
 float,HOVER_ANIM_LENGTH,.2
 String,TERRAIN_TILE,terrain2
 #
-# SHADER FILES
-#
-String,ENTITY_VERTEX,src/renderEngine/entities/entityVertex.glsl
-String,ENTITY_FRAGMENT,src/renderEngine/entities/entityFragment.glsl
-String,GUI_VERTEX,src/renderEngine/gui/guiVertex.glsl
-String,GUI_FRAGMENT,src/renderEngine/gui/guiFragment.glsl
-String,FONT_VERTEX,src/renderEngine/fontRendering/fontVertex.glsl
-String,FONT_FRAGMENT,src/renderEngine/fontRendering/fontFragment.glsl
-String,SKYBOX_VERTEX,src/renderEngine/skybox/skyboxVertex.glsl
-String,SKYBOX_FRAGMENT,src/renderEngine/skybox/skyboxFragment.glsl
-#
 # CAMERA SETTINGS
 #
 float,FOV,60

@@ -1,11 +1,9 @@
-package renderEngine.postProcessing.contrast;
-
-import renderEngine.ShaderProgram;
+package renderEngine.shaders;
 
 public class ContrastShader extends ShaderProgram {
 
-	private final static String VERTEX_FILE = "src/renderEngine/postProcessing/contrast/contrastVertex.glsl";
-	private final static String FRAGMENT_FILE = "src/renderEngine/postProcessing/contrast/contrastFragment.glsl";
+	private final static String VERTEX_FILE = "src/renderEngine/shaders/contrastVertex.glsl";
+	private final static String FRAGMENT_FILE = "src/renderEngine/shaders/contrastFragment.glsl";
 	
 	public ContrastShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);

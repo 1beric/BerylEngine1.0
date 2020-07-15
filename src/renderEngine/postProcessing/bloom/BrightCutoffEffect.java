@@ -1,8 +1,9 @@
 package renderEngine.postProcessing.bloom;
 
-import renderEngine.ShaderProgram;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
+import renderEngine.shaders.BrightCutoffShader;
+import renderEngine.shaders.ShaderProgram;
 
 public class BrightCutoffEffect extends PostProcessingEffect {
 

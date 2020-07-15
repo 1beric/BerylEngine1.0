@@ -1,11 +1,9 @@
-package renderEngine.postProcessing.brightness;
-
-import renderEngine.ShaderProgram;
+package renderEngine.shaders;
 
 public class BrightnessShader extends ShaderProgram {
 	
-	private static final String VERTEX_FILE = "src/renderEngine/postProcessing/brightness/simpleVertex.glsl";
-	private static final String FRAGMENT_FILE = "src/renderEngine/postProcessing/brightness/brightnessFragment.glsl";
+	private static final String VERTEX_FILE = "src/renderEngine/shaders/simpleVertex.glsl";
+	private static final String FRAGMENT_FILE = "src/renderEngine/shaders/brightnessFragment.glsl";
 	
 	public BrightnessShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);

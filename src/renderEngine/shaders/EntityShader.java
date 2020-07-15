@@ -1,9 +1,8 @@
-package renderEngine.entities;
+package renderEngine.shaders;
 
 import org.lwjgl.opengl.GL13;
 
 import models.components.renderable.LightRC;
-import renderEngine.ShaderProgram;
 import renderEngine.models.Texture;
 import settings.Constants;
 import tools.math.BerylMath;
@@ -13,8 +12,8 @@ import tools.math.BerylVector;
 public class EntityShader extends ShaderProgram {
 
 	
-	private final static String VERTEX_FILE = (String)Constants.get("ENTITY_VERTEX");
-	private final static String FRAGMENT_FILE = (String)Constants.get("ENTITY_FRAGMENT");
+	private final static String VERTEX_FILE = "src/renderEngine/shaders/entityVertex.glsl";
+	private final static String FRAGMENT_FILE = "src/renderEngine/shaders/entityFragment.glsl";
 	
 	public EntityShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);

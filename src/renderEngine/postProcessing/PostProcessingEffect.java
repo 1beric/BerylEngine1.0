@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL13;
 
 import models.components.renderable.BerylRC;
 import models.data.Entity;
-import renderEngine.ShaderProgram;
 import renderEngine.models.Texture;
+import renderEngine.shaders.ShaderProgram;
 
 public abstract class PostProcessingEffect extends BerylRC {
 

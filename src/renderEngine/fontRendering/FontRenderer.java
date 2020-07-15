@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import renderEngine.fontMeshCreator.GUIText;
+import renderEngine.shaders.FontShader;
 
 public class FontRenderer {
 

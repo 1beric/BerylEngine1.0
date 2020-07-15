@@ -1,14 +1,12 @@
-package renderEngine.gui;
+package renderEngine.shaders;
 
-import renderEngine.ShaderProgram;
-import settings.Constants;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;
 
 public class GUIShader extends ShaderProgram {
 
-	private final static String VERTEX_FILE = (String)Constants.get("GUI_VERTEX");
-	private final static String FRAGMENT_FILE = (String)Constants.get("GUI_FRAGMENT");
+	private final static String VERTEX_FILE = "src/renderEngine/shaders/guiVertex.glsl";
+	private final static String FRAGMENT_FILE = "src/renderEngine/shaders/guiFragment.glsl";
 
 	public GUIShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);

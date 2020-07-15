@@ -13,6 +13,7 @@ import guiSystem.elements.TextGUI;
 import models.data.ModelData;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
+import renderEngine.shaders.GUIShader;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
 import renderEngine.Loader;

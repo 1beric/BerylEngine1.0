@@ -2,9 +2,10 @@ package renderEngine.postProcessing.gaussianBlur;
 
 import models.data.Entity;
 import renderEngine.BerylDisplay;
-import renderEngine.ShaderProgram;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
+import renderEngine.shaders.ShaderProgram;
+import renderEngine.shaders.VerticalGaussianBlurShader;
 
 public class VerticalGaussianBlur extends PostProcessingEffect {
 

@@ -1,7 +1,10 @@
 package renderEngine;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
+import guiSystem.elements.Mesh2RC;
 import models.Scene;
 import renderEngine.entities.EntityRenderer;
 import renderEngine.gameView.GameViewRenderer;
@@ -44,27 +47,28 @@ public class MasterRenderer {
 	 * @param scene
 	 */
 	public static Texture render(Scene scene) {
-		
+		Texture sceneImage = renderScene(scene);
+		return renderPPEsAndGUI(scene.getMesh2RCs(), sceneImage);
+	}
+	
+	private static Texture renderScene(Scene scene) {
 		fboMS.bind();
-
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glClearColor(scene.getSky().getColor().x,scene.getSky().getColor().y,scene.getSky().getColor().z,1);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
-		
 		skyboxRenderer.render(scene.getCam(),scene.getSky());
 		entityRenderer.render(scene.getMesh3RCs(),scene.getLight(),scene.getCam());
 		fboMS.unbind();
-		
 		fboMS.resolve(fbo);
-		
-		Texture tex = postProcessor.render(fbo.getTexture(), scene.getPostProcessingEffects());
-		
+		return postProcessor.render(fbo.getTexture(), scene.getPostProcessingEffects());
+	}
+	
+	private static Texture renderPPEsAndGUI(List<Mesh2RC> meshes, Texture scene) {
 		fbo.bind();
-		gameViewRenderer.render(tex);
-		guiRenderer.render(scene.getMesh2RCs());
+		gameViewRenderer.render(scene);
+		guiRenderer.render(meshes);
 		fbo.unbind();
-		
 		return fbo.getTexture();
 	}
 	

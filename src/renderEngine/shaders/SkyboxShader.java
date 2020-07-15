@@ -1,7 +1,5 @@
-package renderEngine.skybox;
+package renderEngine.shaders;
 
-import renderEngine.ShaderProgram;
-import settings.Constants;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;
@@ -11,7 +9,7 @@ public class SkyboxShader extends ShaderProgram {
 	private float rotation;
 	
 	public SkyboxShader() {
-		super((String)Constants.get("SKYBOX_VERTEX"), (String)Constants.get("SKYBOX_FRAGMENT"));
+		super("src/renderEngine/shaders/skyboxVertex.glsl", "src/renderEngine/shaders/skyboxFragment.glsl");
 	}
 
 	@Override

@@ -3,10 +3,11 @@ package renderEngine.postProcessing.bloom;
 import org.lwjgl.opengl.GL13;
 
 import models.data.Entity;
-import renderEngine.ShaderProgram;
 import renderEngine.models.Texture;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
+import renderEngine.shaders.CombineShader;
+import renderEngine.shaders.ShaderProgram;
 
 public class CombineEffect extends PostProcessingEffect {
 	

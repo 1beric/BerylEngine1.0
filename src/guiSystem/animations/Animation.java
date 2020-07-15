@@ -130,6 +130,11 @@ public abstract class Animation {
 		return this;
 	}
 	
+	public Animation withAutoReverse(boolean ar) {
+		this.autoReverse = ar;
+		return this;
+	}
+	
 
 	/**
 	 * @return the seconds

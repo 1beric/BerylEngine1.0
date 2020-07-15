@@ -1,13 +1,11 @@
-package renderEngine.fontRendering;
+package renderEngine.shaders;
 
-import renderEngine.ShaderProgram;
-import settings.Constants;
 import tools.math.BerylVector;
 
 public class FontShader extends ShaderProgram {
 
-	private static final String VERTEX_FILE = (String)Constants.get("FONT_VERTEX");
-	private static final String FRAGMENT_FILE = (String)Constants.get("FONT_FRAGMENT");
+	private static final String VERTEX_FILE = "src/renderEngine/shaders/fontVertex.glsl";
+	private static final String FRAGMENT_FILE = "src/renderEngine/shaders/fontFragment.glsl";
 	
 	public FontShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);

@@ -1,9 +1,10 @@
 package renderEngine.postProcessing.contrast;
 
 import models.data.Entity;
-import renderEngine.ShaderProgram;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
+import renderEngine.shaders.ContrastShader;
+import renderEngine.shaders.ShaderProgram;
 
 public class ContrastEffect extends PostProcessingEffect {
 

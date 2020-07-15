@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.data.Entity;
-import renderEngine.ShaderProgram;
 import renderEngine.models.Texture;
 import renderEngine.postProcessing.PostProcessingEffect;
+import renderEngine.shaders.ShaderProgram;
 
 public class CompoundGaussianBlur extends PostProcessingEffect {
 
