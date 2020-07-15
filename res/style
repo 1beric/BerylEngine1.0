@@ -1,0 +1,50 @@
+class order of elements
+	- static constants				(used whenever possible, defined in a constant .txt file)
+	- static fields					(few if any should exist)
+	- public static methods			(used only if class is singleton or a static class)
+	- protected static methods		(few if any should exist)
+	- private static methods 		(few if any should exist)
+	- public fields 				(few if any should exist)
+	- protected fields				(reserved for abstract classes)
+	- private fields				(used whenever possible)
+	- constructors					(recommended to be public, private if singleton)
+	- init methods					(used only with multiple constructors)
+	- overridden public methods		(used only if necessary)
+	- overridden protected methods	(opted for over public)
+	- abstract public methods		(used only if necessary)
+	- abstract protected methods	(opted for over public)
+	- public methods				(used only if necessary)
+	- protected methods				(opted for over public)
+	- private methods				(used whenever possible)
+	- getters & setters				(in order of fields listed)
+	- inner enums					(recommended to be private, protected if necessary)
+	- inner interfaces				(recommended to be private, protected if necessary)
+	- inner classes					(must be private)
+	
+inline code
+	- statements should be on the same line without braces if possible
+			if (true) // amazing
+			else	  // better
+	- method declarations and calls with many parameters should have parameters split among lines
+		new TextGUI(
+				"wow",
+				1,
+				"candara",
+				new BerylVector(0),
+				0.5f,
+				"pixel",
+				RectStyles.CC,
+				this
+		);
+	- braces shall be on the same line as elements they go with
+			if (true) {
+				// text
+				// text
+			} else {
+				// wow
+				// good
+			}
+	
+	
+	
+	

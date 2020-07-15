@@ -1,0 +1,19 @@
+
+Camera,CameraRC
+Camera,CameraController
+
+OBJ,ObjectController
+
+FPSRect,FPSUpdater
+
+
+
+Scripts,GUI
+# Scripts,FullTerrain
+Scripts,FPSUpdater
+Scripts,SkyAnimator
+# Scripts,SaveSystem
+# Scripts,Gravity
+# Scripts,Printer
+Scripts,CameraUpdater
+Scripts,Recompiler

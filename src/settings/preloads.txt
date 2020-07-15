@@ -1,0 +1,30 @@
+#
+# OBJs to preload
+#
+obj,terrain2
+obj,table
+obj,cabinet
+# obj,neural
+# obj,PistolShell
+#
+# textures to preload
+#
+png,white
+sky,white;white;white;white;white;white
+sky,right;left;top;bottom;back;front
+sky,nightRight;nightLeft;nightTop;nightBottom;nightBack;nightFront
+# png,right
+# png,left
+# png,top
+# png,bottom
+# png,back
+# png,front
+# png,nightRight
+# png,nightLeft
+# png,nightTop
+# png,nightBottom
+# png,nightBack
+# png,nightFront
+#
+#
+#

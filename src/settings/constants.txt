@@ -1,0 +1,79 @@
+#
+# DISPLAY SETTINGS
+#
+int,SCREEN_WIDTH,1400
+int,SCREEN_HEIGHT,1080
+int,FPS_CAP,120
+#
+# SKY
+#
+Vector3f,DAY_COLOR,6F84AE
+Vector3f,NIGHT_COLOR,161C27
+float,DAY_LENGTH,50
+float,DTN_LENGTH,20
+float,NIGHT_LENGTH,30
+float,NTD_LENGTH,20
+float,SKYBOX_SIZE,800
+float,SKYBOX_LOWER_LIMIT,-850
+float,SKYBOX_UPPER_LIMIT,-850
+float,SKYBOX_ROTATION_SPEED,1
+String[],SKYBOX_DAY_TEXTURES,right,left,top,bottom,back,front
+String[],SKYBOX_NIGHT_TEXTURES,nightRight,nightLeft,nightTop,nightBottom,nightBack,nightFront
+String[],DEFAULT_SKYBOX,white,white,white,white,white,white
+#
+# TERRAIN
+#
+float,TERRAIN_SIZE,128
+int,TERRAIN_LEVELS,7
+float,TERRAIN_HEIGHT,0
+float,TERRAIN_HEIGHT_OFFSET,.1
+float,TERRAIN_THICKNESS,.5
+Vector3f,TERRAIN_COLOR,0.4,0.6,0.3
+Vector3f,TERRAIN_SELECTED_COLOR,0.5,0.4,0.2
+float,HOVER_ANIM_LENGTH,.2
+String,TERRAIN_TILE,terrain2
+#
+# SHADER FILES
+#
+String,ENTITY_VERTEX,src/renderEngine/entities/entityVertex.glsl
+String,ENTITY_FRAGMENT,src/renderEngine/entities/entityFragment.glsl
+String,GUI_VERTEX,src/renderEngine/gui/guiVertex.glsl
+String,GUI_FRAGMENT,src/renderEngine/gui/guiFragment.glsl
+String,FONT_VERTEX,src/renderEngine/fontRendering/fontVertex.glsl
+String,FONT_FRAGMENT,src/renderEngine/fontRendering/fontFragment.glsl
+String,SKYBOX_VERTEX,src/renderEngine/skybox/skyboxVertex.glsl
+String,SKYBOX_FRAGMENT,src/renderEngine/skybox/skyboxFragment.glsl
+#
+# CAMERA SETTINGS
+#
+float,FOV,60
+float,NEAR_PLANE,0.1
+float,FAR_PLANE,2000
+float,CAMERA_MIN_ZOOM,10
+float,CAMERA_MAX_ZOOM,150
+float,CAMERA_MIN_PITCH,2
+float,CAMERA_MAX_PITCH,88
+float,CAMERA_MOVE_SPEED,5
+#
+# ANIMATIONS
+#
+# need to implement that w a queue
+int,ANIMATIONS_PER_FRAME,100
+#
+# GUI
+#
+float,NAVIGATION_TIME,.5
+String,DEFAULT_FONT,candara
+#
+# MISC
+#
+String,TABLE,table
+String,SAVES_PATH,saves
+String,SAVES_PREFIX,beryl_scene
+String,SAVES_SUFFIX,.bsc
+# ^ .bsc is beryl scene
+#
+#
+#
+#
+#
