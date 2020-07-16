@@ -1,8 +1,9 @@
-package game.components;
+package game;
 
 import guiSystem.elements.Slider;
 import guiSystem.elements.VectorStack;
 import meshCreation.CubeBuilder;
+import meshCreation.PlaneBuilder;
 import models.components.renderable.Mesh3RC;
 import models.components.updatable.BerylUC;
 import models.components.updatable.PhysicsUC;
@@ -12,9 +13,12 @@ import models.data.Material3D;
 import org.lwjgl.glfw.GLFW;
 
 import guiSystem.RectStyle;
+import guiSystem.animations.ChainAnimation;
+import guiSystem.animations.ColorAnimation;
 import guiSystem.animations.PositionAnimation;
 import renderEngine.models.LookupTable;
-import tools.input.BerylKeyboard;
+import renderEngine.models.Texture;
+import tools.io.BerylKeyboard;
 import tools.math.BerylVector;
 
 public class ObjectController extends BerylUC {
@@ -36,11 +40,18 @@ public class ObjectController extends BerylUC {
 		
 		getEntity().getTransform().setScale(new BerylVector(10,10,10));
 		Mesh3RC mesh = new Mesh3RC(getEntity());
-		mesh.setData(CubeBuilder.buildCube().getData());
-		Material3D mat = new Material3D("Cube Material");
+		mesh.setData(PlaneBuilder.buildPlane().getData());
+		Material3D mat = new Material3D("Plane Material");
+		mat.setColor(new BerylVector(1,0,0));
+		mat.setSpecularAndEmissionMap(Texture.green());
 		mat.setShineDamper(1f);
 		mat.setReflectivity(.2f);
 		mesh.setMat(mat);
+		new ChainAnimation(
+				new ColorAnimation(3,new BerylVector(1,0,0),new BerylVector(0,1,0),mat),
+				new ColorAnimation(3,new BerylVector(0,1,0),new BerylVector(1,1,1),mat),
+				new ColorAnimation(3,new BerylVector(1,1,1),new BerylVector(1,0,0),mat)
+		).play();
 		
 		phys = (PhysicsUC) getComponent(PhysicsUC.class);
 		
@@ -49,7 +60,7 @@ public class ObjectController extends BerylUC {
 				new BerylVector(0.1f,0.15f),
 				"percent", "percent",
 				phys.getVelocity(),
-				new Entity("dresser velocity", getEntity().getScene()));
+				new Entity("velocity", getEntity().getScene()));
 		velocityElement.setTransparency(0.5f);
 		velocityElement.setColor(BerylVector.zero());
 		velocityElement.setOriginPoint(RectStyle.CL);

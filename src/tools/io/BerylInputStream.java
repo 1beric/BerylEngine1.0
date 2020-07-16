@@ -1,4 +1,4 @@
-package tools.input;
+package tools.io;
 
 import java.io.ByteArrayInputStream;
 

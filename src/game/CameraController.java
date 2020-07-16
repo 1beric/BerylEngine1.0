@@ -1,4 +1,4 @@
-package game.components;
+package game;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -9,8 +9,8 @@ import models.components.updatable.BerylUC;
 import models.data.Entity;
 import settings.Constants;
 import tools.MouseHoverState;
-import tools.input.BerylKeyboard;
-import tools.input.BerylMouse;
+import tools.io.BerylKeyboard;
+import tools.io.BerylMouse;
 import tools.BerylTime;
 import tools.math.BerylMath;
 import tools.math.BerylVector;

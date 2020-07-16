@@ -5,8 +5,8 @@ import models.data.Entity;
 import guiSystem.RectStyle;
 import tools.Interpolators;
 import tools.Interpolators.Interpolator;
-import tools.input.BerylMouse;
 import tools.interfaces.FloatPasser;
+import tools.io.BerylMouse;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
 

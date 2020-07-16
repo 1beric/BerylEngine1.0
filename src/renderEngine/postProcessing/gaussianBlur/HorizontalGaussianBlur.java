@@ -5,7 +5,7 @@ import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
 import renderEngine.shaders.HorizontalGaussianBlurShader;
 import renderEngine.shaders.ShaderProgram;
-import tools.BerylDisplay;
+import tools.io.BerylDisplay;
 
 public class HorizontalGaussianBlur extends PostProcessingEffect {
 

@@ -2,7 +2,7 @@ package guiSystem.elements;
 
 import models.data.Entity;
 import guiSystem.RectStyle;
-import tools.input.BerylMouse;
+import tools.io.BerylMouse;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
 

@@ -3,7 +3,7 @@ package guiSystem.elements;
 import models.data.Entity;
 import guiSystem.RectStyle;
 import settings.Constants;
-import tools.BerylDisplay;
+import tools.io.BerylDisplay;
 import tools.math.BerylVector;
 
 public class TextGUI extends Mesh2RC {

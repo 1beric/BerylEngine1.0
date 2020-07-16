@@ -1,4 +1,4 @@
-package game.components;
+package game;
 
 import guiSystem.elements.Mesh2RC;
 import guiSystem.elements.Rect;
@@ -6,8 +6,8 @@ import guiSystem.elements.TextGUI;
 import models.components.updatable.BerylUC;
 import models.data.Entity;
 import guiSystem.RectStyle;
-import tools.BerylDisplay;
 import tools.BerylTime;
+import tools.io.BerylDisplay;
 import tools.math.BerylVector;
 
 public class FPSUpdater extends BerylUC {

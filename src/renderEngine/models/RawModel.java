@@ -3,6 +3,7 @@ package renderEngine.models;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.system.NativeType;
 
 import models.data.ModelData;
 
@@ -50,10 +51,46 @@ public class RawModel {
 		switch (data.getType()) {
 		case POS_DIMS:
 		case POS_TEXS:
-			GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, vertexCount);
+			GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, vertexCount);
 			break;
 		case POS_TEXS_NORMS_INDS:
 			GL11.glDrawElements(GL11.GL_TRIANGLES, vertexCount, GL11.GL_UNSIGNED_INT, 0);
+			break;
+		case POS_TEXS_NORMS_TANGS_INDS:
+			System.out.println("UNSUPPORTED");
+			break;
+		case NOT_SET:
+		default:
+			break;
+		}
+	}
+	
+	public void drawMulti() {
+		switch (data.getType()) {
+		case POS_DIMS:
+		case POS_TEXS:
+			GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, vertexCount);
+			break;
+		case POS_TEXS_NORMS_INDS:
+			GL11.glDrawElements(GL11.GL_TRIANGLES, vertexCount, GL11.GL_UNSIGNED_INT, 0);
+			break;
+		case POS_TEXS_NORMS_TANGS_INDS:
+			System.out.println("UNSUPPORTED");
+			break;
+		case NOT_SET:
+		default:
+			break;
+		}
+	}
+	
+	public void draw(@NativeType(value="GLenum")int mode) {
+		switch (data.getType()) {
+		case POS_DIMS:
+		case POS_TEXS:
+			GL11.glDrawArrays(mode, 0, vertexCount);
+			break;
+		case POS_TEXS_NORMS_INDS:
+			GL11.glDrawElements(mode, vertexCount, GL11.GL_UNSIGNED_INT, 0);
 			break;
 		case POS_TEXS_NORMS_TANGS_INDS:
 			System.out.println("UNSUPPORTED");

@@ -1,4 +1,4 @@
-package game.components;
+package game;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,8 +10,8 @@ import models.components.BerylComponent;
 import models.components.updatable.BerylUC;
 import models.data.Entity;
 import tools.BerylTime;
-import tools.input.BerylKeyboard;
-import tools.input.BerylMouse;
+import tools.io.BerylKeyboard;
+import tools.io.BerylMouse;
 
 public class Debugger extends BerylUC {
 

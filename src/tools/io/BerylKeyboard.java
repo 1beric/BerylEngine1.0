@@ -1,12 +1,10 @@
-package tools.input;
+package tools.io;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
-
-import tools.BerylDisplay;
 
 public class BerylKeyboard {
 

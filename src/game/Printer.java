@@ -1,9 +1,9 @@
-package game.components;
+package game;
 
 
 import models.components.updatable.BerylUC;
 import models.data.Entity;
-import tools.input.BerylKeyboard;
+import tools.io.BerylKeyboard;
 
 public class Printer extends BerylUC {
 

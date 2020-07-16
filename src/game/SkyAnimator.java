@@ -1,4 +1,4 @@
-package game.components;
+package game;
 
 import guiSystem.animations.Animation;
 import guiSystem.animations.ChainAnimation;

@@ -3,13 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.components.CameraController;
-import game.components.Debugger;
-import game.components.FPSUpdater;
-import game.components.GUIHandler;
-import game.components.ObjectController;
-import game.components.PostProcessingHandler;
-import game.components.SkyAnimator;
+import game.CameraController;
+import game.Debugger;
+import game.FPSUpdater;
+import game.GUIHandler;
+import game.ObjectController;
+import game.PostProcessingHandler;
+import game.SkyAnimator;
 import guiSystem.animations.CustomAnimation;
 import guiSystem.elements.Mesh2RC;
 import models.components.BerylComponent;
@@ -30,8 +30,8 @@ import renderEngine.postProcessing.gaussianBlur.CompoundGaussianBlur;
 import renderEngine.postProcessing.gaussianBlur.GaussianBlur;
 import renderEngine.postProcessing.gaussianBlur.HorizontalGaussianBlur;
 import tools.Interpolators;
-import tools.input.BerylMouse;
 import tools.interfaces.Updatable;
+import tools.io.BerylMouse;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
 
@@ -63,18 +63,6 @@ public class Scene implements Updatable {
 	public void onLateUpdate() {
 		uComponents.forEach(component->component.onLateUpdate());
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public boolean addComponent(BerylComponent component) {
 		if (component instanceof BerylRC) rComponents.add((BerylRC)component);

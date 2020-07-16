@@ -1,7 +1,7 @@
 package tools.math;
 
 import guiSystem.RectStyle;
-import tools.BerylDisplay;
+import tools.io.BerylDisplay;
 public class BerylMath {
 
 	/**
@@ -75,8 +75,8 @@ public class BerylMath {
 	}
 	
 	public static BerylVector getNDC(float mouseX, float mouseY) {
-		float x = (2f*mouseX) / BerylDisplay.WIDTH - 1;
-		float y = (2f*mouseY) / BerylDisplay.HEIGHT - 1;
+		float x = (2f*mouseX) / BerylDisplay.getScreenWidth() - 1;
+		float y = (2f*mouseY) / BerylDisplay.getScreenHeight() - 1;
 		return new BerylVector(x,y);
 	}
 
@@ -170,5 +170,19 @@ public class BerylMath {
 		
 		return null;
 	}
+	
+	public static byte maskToByte(int val, int shiftInBytes) {
+		int shifted = val >> 8 * shiftInBytes;
+		int masked 	= shifted & 0x000000FF;
+		return (byte) masked;
+	}
+	
+	public static byte maskToByte(float floatVal, int shiftInBytes) {
+		int val = Float.floatToIntBits(floatVal);
+		int shifted = val >> 8 * shiftInBytes;
+		int masked 	= shifted & 0x000000FF;
+		return (byte) masked;
+	}
+	
 
 }

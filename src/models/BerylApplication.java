@@ -1,4 +1,4 @@
-package game;
+package models;
 import java.io.File;
 
 import org.lwjgl.Version;
@@ -11,7 +11,6 @@ import meshCreation.Loader;
 import meshCreation.fontMeshCreation.FontType;
 import meshCreation.fontMeshCreation.GUIText;
 import meshCreation.fontMeshCreation.TextMeshData;
-import models.Scene;
 import models.components.renderable.Transform2D;
 import models.data.ModelData;
 import renderEngine.MasterRenderer;
@@ -19,11 +18,11 @@ import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
 import settings.Constants;
 import settings.PreloadLookupTable;
-import tools.BerylDisplay;
 import tools.BerylGL;
 import tools.BerylTime;
-import tools.input.BerylInputSystem;
-import tools.input.BerylMouse;
+import tools.io.BerylDisplay;
+import tools.io.BerylInputSystem;
+import tools.math.BerylVector;
 
 public class BerylApplication {
 
@@ -37,8 +36,7 @@ public class BerylApplication {
 	private Editor editor;
 	
 	public void run() {
-		System.out.println("Hello LWJGL " + Version.getVersion() + "!");
-
+		System.out.println("Hello, welcome to Beryl Engine!");
 		init();
 		loop();
 		close();
@@ -81,7 +79,11 @@ public class BerylApplication {
 	
 	private void logicUpdate() {
 		Transform2D t = editor.getGameView().getTransform();
-		BerylInputSystem.update(t.getPos(),t.getScale());
+		BerylVector scale = new BerylVector(
+				BerylDisplay.getVPWidth() / (float) BerylDisplay.getScreenWidth(),
+				BerylDisplay.getVPHeight()/ (float) BerylDisplay.getScreenHeight()
+		).mult(t.getScale());
+		BerylInputSystem.update(t.getPos(), scale);
 		BerylTime.updateDelta();
 		scene.onUpdate();
 		scene.onLateUpdate();

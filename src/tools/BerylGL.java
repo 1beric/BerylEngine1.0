@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
 import renderEngine.MasterRenderer;
+import tools.io.BerylDisplay;
 import tools.math.BerylVector;
 
 /**
@@ -39,7 +40,6 @@ public class BerylGL {
 			BerylDisplay.setScreenWidth(screenWidth);
 			BerylDisplay.setScreenHeight(screenHeight);
 			resetViewport();
-//			System.out.println(BerylDisplay.getVpHeight() + "," + BerylDisplay.getVpWidth());
 		});
 	}
 	
@@ -81,9 +81,18 @@ public class BerylGL {
 		GL11.glViewport(vpX, vpY, aspectWidth, aspectHeight);
 		BerylDisplay.setVpWidth(aspectWidth);
 		BerylDisplay.setVpHeight(aspectHeight);
+		BerylDisplay.setVpXOffset(vpX);
+		BerylDisplay.setVpYOffset(vpY);
 		MasterRenderer.resetProjectionMatrix();
 	}
 	
+	public static void clearColor(BerylVector color) {
+		GL11.glClearColor(color.x,color.y,color.z,1);
+	}
+	
+	public static void clear() {
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
+	}
 	
 	public static void enableCulling() {
 		GL11.glEnable(GL11.GL_CULL_FACE);
@@ -92,6 +101,23 @@ public class BerylGL {
 	
 	public static void disableCulling() {
 		GL11.glDisable(GL11.GL_CULL_FACE);
+	}
+	
+	public static void enableDepthTest() {
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+	}
+	
+	public static void disableDepthTest() {
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+	}
+	
+	public static void enableBlending() {
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
+	public static void disableBlending() {
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 }

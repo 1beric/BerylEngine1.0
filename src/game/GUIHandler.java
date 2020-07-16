@@ -1,4 +1,4 @@
-package game.components;
+package game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +28,13 @@ import guiSystem.NavigationSet;
 import guiSystem.NavigationSystem;
 import guiSystem.RectStyle;
 import settings.Constants;
-import tools.BerylDisplay;
 import tools.editorAnnotations.GetMethod;
 import tools.editorAnnotations.SetMethod;
 import tools.editorAnnotations.ShowInEditor;
-import tools.input.BerylKeyboard;
 import tools.interfaces.FloatPasser;
 import tools.interfaces.MouseEventHandler;
+import tools.io.BerylDisplay;
+import tools.io.BerylKeyboard;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
 

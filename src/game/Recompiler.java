@@ -1,10 +1,10 @@
-package game.components;
+package game;
 
 import models.Scene;
 import models.components.BerylComponent;
 import models.components.updatable.BerylUC;
 import models.data.Entity;
-import tools.input.BerylKeyboard;
+import tools.io.BerylKeyboard;
 
 public class Recompiler extends BerylUC {
 

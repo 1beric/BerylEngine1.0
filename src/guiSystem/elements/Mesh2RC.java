@@ -8,9 +8,9 @@ import models.components.renderable.Transform2D;
 import models.data.Entity;
 import models.data.Material2D;
 import guiSystem.RectStyle;
-import tools.BerylDisplay;
-import tools.input.BerylMouse;
 import tools.interfaces.MouseEventHandler;
+import tools.io.BerylDisplay;
+import tools.io.BerylMouse;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
 

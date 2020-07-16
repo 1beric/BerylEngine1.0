@@ -1,9 +1,6 @@
 package renderEngine.renderers;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
 
 import meshCreation.Loader;
 import models.components.renderable.CameraRC;
@@ -36,7 +33,6 @@ public class SkyboxRenderer {
 	public void render(CameraRC cam, SkyboxRC sky) {
 		if (shader.isRecompiled()) {
 			shader.bind();
-			shader.connectTextureUnits();
 			shader.loadProjectionMatrix(BerylMath.getProjectionMatrix());
 			shader.unbind();
 			shader.setRecompiled(false);
@@ -47,10 +43,12 @@ public class SkyboxRenderer {
 		shader.loadFogColor(sky.getColor());
 		shader.loadFogLimits(sky.getLower(), sky.getUpper());
 		cube.bind();
-		shader.bindTextures(LookupTable.getTexture(sky.getCubeMap1()).getTextureID(),LookupTable.getTexture(sky.getCubeMap2()).getTextureID(), sky.getFactor());
-		GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, cube.getVertexCount());
-		GL20.glDisableVertexAttribArray(0);
-		GL30.glBindVertexArray(0);
+		shader.bindTextures(
+				LookupTable.getTexture(sky.getCubeMap1()),
+				LookupTable.getTexture(sky.getCubeMap2()),
+				sky.getFactor());
+		cube.draw(GL11.GL_TRIANGLES);
+		cube.unbind();
 		shader.unbind();
 	}
 

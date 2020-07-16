@@ -1,7 +1,5 @@
 package renderEngine;
 
-import org.lwjgl.opengl.GL11;
-
 import editor.GameView;
 import models.Scene;
 import renderEngine.models.FrameBuffer;
@@ -12,9 +10,20 @@ import renderEngine.renderers.EntityRenderer;
 import renderEngine.renderers.GUIRenderer;
 import renderEngine.renderers.SkyboxRenderer;
 import renderEngine.renderers.WindowRenderer;
+import tools.BerylGL;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 
+/**
+ * The default state of GL settings should be
+ * <p>
+ * 	- depth on <br>
+ * 	- culling on <br>
+ *  - blend off <br>
+ *  </p>
+ * @author Brandon Erickson
+ *
+ */
 public class MasterRenderer {
 
 	private static EntityRenderer entityRenderer;
@@ -44,16 +53,16 @@ public class MasterRenderer {
 	 * @param scene
 	 */
 	public static Texture render(Scene scene) {
-		Texture sceneImage = renderScene(scene);
+		Texture[] sceneImage = renderScene(scene);
 		return guiRenderer.render(scene.getMesh2RCs(), sceneImage);
 	}
 	
-	private static Texture renderScene(Scene scene) {
+	private static Texture[] renderScene(Scene scene) {
 		fboMS.bind();
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glClearColor(scene.getSky().getColor().x,scene.getSky().getColor().y,scene.getSky().getColor().z,1);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
+		BerylGL.enableDepthTest();
+		BerylGL.enableCulling();
+		BerylGL.clearColor(scene.getSky().getColor());
+		BerylGL.clear();
 		skyboxRenderer.render(scene.getCam(),scene.getSky());
 		entityRenderer.render(scene.getMesh3RCs(),scene.getLight(),scene.getCam());
 		fboMS.unbind();

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import tools.BerylDisplay;
+import tools.io.BerylDisplay;
 
 /**
  * Provides functionality for getting the values from a font file.

@@ -15,7 +15,7 @@ void main(void){
 
 	float distance = 1.0 - texture(fontAtlas, pass_textureCoords).a;
 	float alpha = transparency - smoothstep(width,width+edge,distance);
-	
+	alpha = clamp(alpha,0,1);
 
 	out_Color = vec4(color, alpha);
 

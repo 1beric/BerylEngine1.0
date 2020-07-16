@@ -1,4 +1,4 @@
-package tools.input;
+package tools.io;
 
 import java.nio.DoubleBuffer;
 
@@ -7,7 +7,6 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
-import tools.BerylDisplay;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;
@@ -44,7 +43,7 @@ public class BerylMouse {
 
 	public static void update() {
 		updateMousePos();
-		currentScreenRay = BerylMath.getNDC(glfwMousePos.x, BerylDisplay.HEIGHT-glfwMousePos.y).sub(rectPos).div(rectSize);
+		currentScreenRay = BerylMath.getNDC(glfwMousePos.x, BerylDisplay.getScreenHeight()-glfwMousePos.y).sub(rectPos).div(rectSize);
 		currentRay = BerylMath.calculateRay(currentScreenRay, camPos, camRot);
 	}
 	
@@ -132,15 +131,6 @@ public class BerylMouse {
 		return rectSize;
 	}
 
-
-	/**
-	 * @param screenSize the screenSize to set
-	 */
-	public static void setRectSize(BerylVector screenSize) {
-		BerylMouse.rectSize = screenSize;
-	}
-
-
 	/**
 	 * @return the screenPos
 	 */
@@ -152,8 +142,9 @@ public class BerylMouse {
 	/**
 	 * @param screenPos the screenPos to set
 	 */
-	public static void setRectPos(BerylVector screenPos) {
+	public static void setRect(BerylVector screenPos, BerylVector screenSize) {
 		BerylMouse.rectPos = screenPos;
+		BerylMouse.rectSize = screenSize;
 	}
 	
 }

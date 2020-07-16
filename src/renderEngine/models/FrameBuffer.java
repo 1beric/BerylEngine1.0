@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
 
-import tools.BerylDisplay;
 import tools.BerylGL;
+import tools.io.BerylDisplay;
 
 public class FrameBuffer {
 

@@ -2,8 +2,8 @@ package guiSystem.elements;
 
 import guiSystem.RectStyle;
 import models.data.Entity;
-import tools.BerylDisplay;
-import tools.input.BerylMouse;
+import tools.io.BerylDisplay;
+import tools.io.BerylMouse;
 import tools.math.BerylVector;
 
 public class ParentPosController extends Rect {

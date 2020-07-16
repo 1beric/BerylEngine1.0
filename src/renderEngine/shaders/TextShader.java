@@ -1,13 +1,16 @@
 package renderEngine.shaders;
 
+import org.lwjgl.opengl.GL13;
+
+import renderEngine.models.Texture;
 import tools.math.BerylVector;
 
-public class FontShader extends ShaderProgram {
+public class TextShader extends ShaderProgram {
 
-	private static final String VERTEX_FILE = "src/renderEngine/shaders/fontVertex.glsl";
-	private static final String FRAGMENT_FILE = "src/renderEngine/shaders/fontFragment.glsl";
+	private static final String VERTEX_FILE = "src/renderEngine/shaders/textVertex.glsl";
+	private static final String FRAGMENT_FILE = "src/renderEngine/shaders/textFragment.glsl";
 	
-	public FontShader() {
+	public TextShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);
 	}
 
@@ -39,6 +42,11 @@ public class FontShader extends ShaderProgram {
 	public void bindAttributes() {
 		super.bindAttribute(0, "position");
 		super.bindAttribute(1, "textureCoords");
+	}
+
+	public void loadTexture(Texture textureAtlas) {
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		textureAtlas.bind();	
 	}
 
 

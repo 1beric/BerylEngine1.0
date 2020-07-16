@@ -1,4 +1,4 @@
-package tools;
+package tools.io;
 
 import java.nio.IntBuffer;
 
@@ -13,7 +13,6 @@ import org.lwjgl.system.MemoryUtil;
 
 import meshCreation.Loader;
 import renderEngine.models.TextureData;
-import tools.input.BerylInputSystem;
 
 public class BerylDisplay {
 
@@ -29,6 +28,8 @@ public class BerylDisplay {
 	private static int height = HEIGHT;
 	private static int vpWidth = WIDTH;
 	private static int vpHeight = HEIGHT;
+	private static int vpXOffset = 0;
+	private static int vpYOffset = 0;
 
 
 	/**
@@ -196,6 +197,34 @@ public class BerylDisplay {
 	 */
 	public static void setVpHeight(int vpHeight) {
 		BerylDisplay.vpHeight = vpHeight;
+	}
+
+	/**
+	 * @return the vpXOffset
+	 */
+	public static int getVPXOffset() {
+		return vpXOffset;
+	}
+
+	/**
+	 * @param vpXOffset the vpXOffset to set
+	 */
+	public static void setVpXOffset(int vpXOffset) {
+		BerylDisplay.vpXOffset = vpXOffset;
+	}
+
+	/**
+	 * @return the vpYOffset
+	 */
+	public static int getVPYOffset() {
+		return vpYOffset;
+	}
+
+	/**
+	 * @param vpYOffset the vpYOffset to set
+	 */
+	public static void setVpYOffset(int vpYOffset) {
+		BerylDisplay.vpYOffset = vpYOffset;
 	}
 	
 	

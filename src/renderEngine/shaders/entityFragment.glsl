@@ -5,7 +5,8 @@ in vec3 surfaceNormal;
 in vec3 toLightVector;
 in vec3 toCameraVector;
 
-out vec4 out_Color;
+layout (location = 0) out vec4 out_Color;
+layout (location = 1) out vec4 out_BrightColor;
 
 uniform sampler2D modelTexture;
 uniform sampler2D specularAndEmissionMap;
@@ -19,6 +20,8 @@ uniform float reflectivity;
 const float levels = 3;
 
 void main(void) {
+
+	out_BrightColor = vec4(0.0);
 
 	vec3 unitNormal = normalize(surfaceNormal);
 	vec3 unitVectorToCamera = normalize(toCameraVector);
@@ -52,9 +55,16 @@ void main(void) {
 		totalSpecular *= mapInfo.r;
 		if (mapInfo.g > 0.5) {
 			totalDiffuse = vec3(1.0);
+			out_BrightColor = vec4(1.0);
 		}
 	}
 
 	out_Color = vec4(totalDiffuse,1.0) * textureColor + vec4(totalSpecular,1.0);
+
+
+	float brightness = (out_Color.r * 0.2126) + (out_Color.g * 0.7152) + (out_Color.b * 0.0722);
+	if (brightness > 0.7 || mapInfo.g) {
+		out_BrightColor = vec4(1.0);
+	}
 
 }

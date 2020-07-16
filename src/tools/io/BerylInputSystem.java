@@ -1,4 +1,4 @@
-package tools.input;
+package tools.io;
 
 import renderEngine.MasterRenderer;
 import tools.math.BerylVector;
@@ -11,8 +11,7 @@ public class BerylInputSystem {
 	}
 	
 	public static void update(BerylVector pos, BerylVector size) {
-		BerylMouse.setRectPos(pos);
-		BerylMouse.setRectSize(size);
+		BerylMouse.setRect(pos, size);
 		BerylKeyboard.update();
 		BerylMouse.update();
 	}

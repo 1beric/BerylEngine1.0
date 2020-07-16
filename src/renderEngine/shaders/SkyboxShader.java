@@ -3,6 +3,7 @@ package renderEngine.shaders;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
+import renderEngine.models.Texture;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;
@@ -32,11 +33,11 @@ public class SkyboxShader extends ShaderProgram {
 		super.bindAttribute(0, "position");
 	}
 	
-	public void bindTextures(int tex1, int tex2, float factor) {
+	public void bindTextures(Texture tex1, Texture tex2, float factor) {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex1);
+		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex1.getTextureID());
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
-		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex2);
+		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex2.getTextureID());
 		super.loadFloat(getUniform("blendFactor"), factor);
 	}
 	public void connectTextureUnits() {
