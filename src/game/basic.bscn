@@ -1,41 +1,20 @@
-Scene {
-	name="basic"
+Scene("basic") { }
+Entity("Cam") { }
+Entity("Light") { }
+Entity("Skybox") { }
+Entity("GUIs") { }
+Entity("Debug Printer") { }
+Entity("Post Processing Effects") { }
+Entity("Cube") { }
+CameraController("Cam") { }
+SkyAnimator("Skybox") { }
+LightRC("Light","basic") {
+	setDir(BerylVector(-1,-1,-1));
+	setColor(BerylVector(1,1,1));
 }
-Entity {
-	name="Cam";
-	name="Light";
-	name="Skybox";
-	name="GUIs";
-	name="Debug Printer";
-	name="Post Processing Effects";
-	name="Cabinet";
-}
-CameraController {
-	entity="Cam"
-}
-SkyAnimator {
-	entity="Skybox"
-}
-LightRC {
-	dir=BerylVector(-1,-1,-1),
-	color=BerylVector(1,1,1),
-	entity="Light"
-}
-FPSUpdater {
-	entity="GUIs"
-}
-GUIHandler {
-	entity="GUIs"
-}
-Debugger {
-	entity="Debug Printer"
-}
-ContrastEffect {
-	entity="Post Processing Effects"
-}
-ObjectController {
-	entity="Cabinet"
-}
-PhysicsUC {
-	entity="Cabinet"
-}
+FPSUpdater("GUIs") { }
+GUIHandler("GUIs") { }
+Debugger("Debug Printer") { }
+ContrastEffect("Post Processing Effects") { }
+ObjectController("Cube") { }
+PhysicsUC("Cube") { }
