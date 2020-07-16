@@ -2,7 +2,7 @@ package guiSystem.elements;
 
 
 import models.data.Entity;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import tools.Interpolators;
 import tools.Interpolators.Interpolator;
 import tools.input.BerylMouse;
@@ -40,8 +40,8 @@ public class Slider extends CustomTargetRect {
 		interpolator = Interpolators.LINEAR;
 		
 		cursor = new Rect(new BerylVector(0.5f,0), new BerylVector(7.5f,25), "percent", "pixel", this, null);
-		cursor.setOriginPoint(RectStyles.CC);
-		cursor.setFromParentPoint(RectStyles.CL);
+		cursor.setOriginPoint(RectStyle.CC);
+		cursor.setFromParentPoint(RectStyle.CL);
 		cursor.setBorderRadius(100f);
 		cursor.setTargetable(false);
 		
@@ -50,25 +50,25 @@ public class Slider extends CustomTargetRect {
 		
 		aboveText = new TextGUI("", 100, new BerylVector(0,-getScale().y*8), "pixel", this, null);
 		aboveText.setColor(BerylVector.one(3));
-		aboveText.setOriginPoint(RectStyles.TC);
+		aboveText.setOriginPoint(RectStyle.TC);
 		
 		cursorText = new FloatTextGUI(0.5f, 1, new BerylVector(0,cursor.getScale().y*1.2f), "pixel", cursor, null);
 		cursorText.setColor(BerylVector.one(3));
-		cursorText.setOriginPoint(RectStyles.BC);
+		cursorText.setOriginPoint(RectStyle.BC);
 		cursorText.setScaleOnHeight(false); 
 		cursorText.setScaleStorageType(StorageType.PERCENT);
 		
 		lowerBoundText = new FloatTextGUI(0, 1, new BerylVector(-10,0), "pixel", this, null);
 		lowerBoundText.setColor(BerylVector.one(3));
-		lowerBoundText.setOriginPoint(RectStyles.CR);
-		lowerBoundText.setFromParentPoint(RectStyles.CL);
+		lowerBoundText.setOriginPoint(RectStyle.CR);
+		lowerBoundText.setFromParentPoint(RectStyle.CL);
 		lowerBoundText.setScaleOnHeight(false);
 		lowerBoundText.setScaleStorageType(StorageType.PERCENT);
 		
 		upperBoundText = new FloatTextGUI(1, 1, new BerylVector(10,0), "pixel", this, null);
 		upperBoundText.setColor(BerylVector.one(3));
-		upperBoundText.setOriginPoint(RectStyles.CL);
-		upperBoundText.setFromParentPoint(RectStyles.CR);
+		upperBoundText.setOriginPoint(RectStyle.CL);
+		upperBoundText.setFromParentPoint(RectStyle.CR);
 		upperBoundText.setScaleOnHeight(false);
 		upperBoundText.setScaleStorageType(StorageType.PERCENT);
 		
@@ -78,11 +78,11 @@ public class Slider extends CustomTargetRect {
 	private void updateCursor() {
 		if (!trackingMouse) return;
 		if (snapAmount > 0) {
-			float val = (BerylMouse.getScreenRay().x-calcScreenPos(RectStyles.CL).x)/calcScreenScale().x;
+			float val = (BerylMouse.getScreenRay().x-calcScreenPos(RectStyle.CL).x)/calcScreenScale().x;
 			val -= (val+snapAmount/2) % snapAmount;
 			cursor.getPos().x = BerylMath.clamp(val+snapAmount/2,0,1);
 		} else {
-			cursor.getPos().x = BerylMath.clamp((BerylMouse.getScreenRay().x-calcScreenPos(RectStyles.CL).x)/calcScreenScale().x, 0, 1);
+			cursor.getPos().x = BerylMath.clamp((BerylMouse.getScreenRay().x-calcScreenPos(RectStyle.CL).x)/calcScreenScale().x, 0, 1);
 		}
 		if (updateOnHold) setValue();
 	}

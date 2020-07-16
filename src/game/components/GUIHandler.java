@@ -21,14 +21,14 @@ import guiSystem.elements.Rect;
 import guiSystem.elements.Slider;
 import guiSystem.elements.TextGUI;
 import guiSystem.elements.ToggleButton;
+import meshCreation.Loader;
 import models.components.updatable.BerylUC;
 import models.data.Entity;
 import guiSystem.NavigationSet;
 import guiSystem.NavigationSystem;
-import guiSystem.RectStyles;
-import renderEngine.BerylDisplay;
-import renderEngine.Loader;
+import guiSystem.RectStyle;
 import settings.Constants;
+import tools.BerylDisplay;
 import tools.editorAnnotations.GetMethod;
 import tools.editorAnnotations.SetMethod;
 import tools.editorAnnotations.ShowInEditor;
@@ -114,8 +114,8 @@ public class GUIHandler extends BerylUC {
 		
 		Rect title = new Rect(new BerylVector(-.25f,0.1f), new BerylVector(900,300), "percent", "pixel", background, null);
 		title.setColor(BerylMath.hexToRGB("4C2B36"));
-		title.setOriginPoint(RectStyles.TC);
-		title.setFromParentPoint(RectStyles.TC);
+		title.setOriginPoint(RectStyle.TC);
+		title.setFromParentPoint(RectStyle.TC);
 		title.setBorderColor(BerylVector.one(3));
 		title.setBorderWidth(2);
 		title.setBorderRadius(3f);
@@ -142,8 +142,8 @@ public class GUIHandler extends BerylUC {
 		transFadeAnim.addMesh(titleText);
 
 		Rect icon = new Rect(new BerylVector(-.05f,0), new BerylVector(1200f, 1200f), "percent", "pixel", background, null);
-		icon.setOriginPoint(RectStyles.CR);
-		icon.setFromParentPoint(RectStyles.CR);
+		icon.setOriginPoint(RectStyle.CR);
+		icon.setFromParentPoint(RectStyle.CR);
 		icon.getMat().setColorTexture(Loader.loadTexture("crystalFull"));
 		transFadeAnim.addMesh(icon);
 		new ParentPosController(1f, icon, null);
@@ -176,8 +176,8 @@ public class GUIHandler extends BerylUC {
 			Button btn = new Button(new BerylVector(-.25f, (i-.5f) * .15f), new BerylVector(500,150), "percent", "pixel", background, null);
 			btn.setColor(BerylMath.hexToRGB("2B4C36"));
 			btn.setBorderRadius(3f);
-			btn.setOriginPoint(RectStyles.CC);
-			btn.setFromParentPoint(RectStyles.CC);
+			btn.setOriginPoint(RectStyle.CC);
+			btn.setFromParentPoint(RectStyle.CC);
 			Animation hoverColorAnim = new ColorAnimation(
 					.1f, 
 					btn.getColor(), 
@@ -210,7 +210,7 @@ public class GUIHandler extends BerylUC {
 					btn.getTransform()));
 			new ParentPosController(btn, null);
 			TextGUI txt = new TextGUI(menuStrs[i], 2, new BerylVector(10,0), "pixel", btn, null);
-			txt.setOriginPoint(RectStyles.CC);
+			txt.setOriginPoint(RectStyle.CC);
 			txt.setScaleOnHeight(false);
 			txt.setColor(new BerylVector(1,1,1));
 			transFadeAnim.addMesh(txt);
@@ -230,8 +230,8 @@ public class GUIHandler extends BerylUC {
 		
 		Rect title = new Rect(new BerylVector(0,.2f), new BerylVector(500,200), "percent", "pixel", background, null);
 		title.setColor(BerylMath.hexToRGB("4C2B36"));
-		title.setOriginPoint(RectStyles.TC);
-		title.setFromParentPoint(RectStyles.TC);
+		title.setOriginPoint(RectStyle.TC);
+		title.setFromParentPoint(RectStyle.TC);
 		title.setBorderColor(BerylVector.one(3));
 		title.setBorderWidth(2);
 		title.setBorderRadius(3f);
@@ -251,8 +251,8 @@ public class GUIHandler extends BerylUC {
 		Button mainMenuBtn = new Button(new BerylVector(.05f,.05f), new BerylVector(300,100), "percent", "pixel", background, null);
 		transFadeAnim.addMesh(mainMenuBtn);
 		mainMenuBtn.setColor(BerylMath.hexToRGB("2B4C36"));
-		mainMenuBtn.setOriginPoint(RectStyles.TL);
-		mainMenuBtn.setFromParentPoint(RectStyles.TL);
+		mainMenuBtn.setOriginPoint(RectStyle.TL);
+		mainMenuBtn.setFromParentPoint(RectStyle.TL);
 		mainMenuBtn.setBorderRadius(3f);
 		Animation hoverColorAnim = new ColorAnimation(
 				.1f, 
@@ -274,7 +274,7 @@ public class GUIHandler extends BerylUC {
 		});
 		mainMenuBtn.setOnMouseClicked(()->changeToSet("main"));
 		TextGUI mainMenuText = new TextGUI("Main Menu", 10, new BerylVector(10,0), "pixel", mainMenuBtn, null);
-		mainMenuText.setOriginPoint(RectStyles.CL);
+		mainMenuText.setOriginPoint(RectStyle.CL);
 		mainMenuText.setColor(new BerylVector(1,1,1));
 		transFadeAnim.addMesh(mainMenuText);
 		
@@ -303,8 +303,8 @@ public class GUIHandler extends BerylUC {
 			Slider slider = new Slider(new BerylVector(0,(i+1)*.1f), 500, "percent", "pixel", background, null);
 			transFadeAnim.addMesh(slider);
 			transFadeAnim.addMesh(slider.getChildren().get(0));
-			slider.setOriginPoint(RectStyles.CC);
-			slider.setFromParentPoint(RectStyles.CC);
+			slider.setOriginPoint(RectStyle.CC);
+			slider.setFromParentPoint(RectStyle.CC);
 			slider.setColor(BerylMath.hexToRGB("FFFFFF"));
 			slider.setCursorColor(BerylMath.hexToRGB("E59500"));
 			slider.setUpdateOnHold(true);
@@ -329,8 +329,8 @@ public class GUIHandler extends BerylUC {
 		background.setName("sceneSideBar");
 		background.setColor(BerylMath.hexToRGB("2B2C28"));
 		background.setTransparency(0.7f);
-		background.setOriginPoint(RectStyles.CR);
-		background.setFromParentPoint(RectStyles.CR);
+		background.setOriginPoint(RectStyle.CR);
+		background.setFromParentPoint(RectStyle.CR);
 		Animation bgTransAnim = new TransparencyAnimation(.1f, .7f, 1, background);
 		background.setOnMouseEntered(()->bgTransAnim.play());
 		background.setOnMouseExited(()->bgTransAnim.playReversed());
@@ -344,8 +344,8 @@ public class GUIHandler extends BerylUC {
 		for (int i=0; i<10; i++) {
 			float yPos = .05f + .1f * (i-5);
 			sideSliders[i] = new Slider(new BerylVector(0f,yPos), background.getScale().x * 0.5f, "percent", "pixel", background, null);
-			sideSliders[i].setOriginPoint(RectStyles.CC);
-			sideSliders[i].setFromParentPoint(RectStyles.CC);
+			sideSliders[i].setOriginPoint(RectStyle.CC);
+			sideSliders[i].setFromParentPoint(RectStyle.CC);
 			sideSliders[i].setCursorColor(BerylMath.hexToRGB("E59500"));
 			sideSliders[i].setUpdateOnHold(true);
 			sideSliders[i].showCursorValue(false);
@@ -360,8 +360,8 @@ public class GUIHandler extends BerylUC {
 		background.setName("sceneHotBar");
 		background.setColor(BerylMath.hexToRGB("2B2C28"));
 		background.setTransparency(0.7f);
-		background.setOriginPoint(RectStyles.BC);
-		background.setFromParentPoint(RectStyles.BC);
+		background.setOriginPoint(RectStyle.BC);
+		background.setFromParentPoint(RectStyle.BC);
 		Animation bgTransAnim = new TransparencyAnimation(.1f, .7f, 1, background);
 		background.setOnMouseEntered(()->bgTransAnim.play());
 		background.setOnMouseExited(()->bgTransAnim.playReversed());
@@ -376,8 +376,8 @@ public class GUIHandler extends BerylUC {
 		for (int i=0; i<10; i++) {
 			items[i] = new ToggleButton(new BerylVector(.05f + .1f * (i-items.length/2), 0f), new BerylVector(.075f,.8f), "percent", "percent", background, null);
 			items[i].setColor(BerylMath.hexToRGB("7E6551"));
-			items[i].setOriginPoint(RectStyles.CC);
-			items[i].setFromParentPoint(RectStyles.CC);
+			items[i].setOriginPoint(RectStyle.CC);
+			items[i].setFromParentPoint(RectStyle.CC);
 			radio.addToggle(items[i]);
 			Animation itemScaleAnim = new ScaleAnimation(.1f,items[i].getScale(),items[i].getScale().mult(1.1f),items[i].getTransform());
 			Animation itemColorAnim = new ColorAnimation(.1f,items[i].getColor(),items[i].getColor().mult(1.8f),items[i].getMat());

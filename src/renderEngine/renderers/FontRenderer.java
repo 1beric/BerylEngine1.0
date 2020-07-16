@@ -1,11 +1,11 @@
-package renderEngine.fontRendering;
+package renderEngine.renderers;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import renderEngine.fontMeshCreator.GUIText;
+import meshCreation.fontMeshCreation.GUIText;
 import renderEngine.shaders.FontShader;
 
 public class FontRenderer {
@@ -30,17 +30,13 @@ public class FontRenderer {
 	public void render(GUIText text) {
 		prepare();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, text.getFont().getTextureAtlas());
-		GL30.glBindVertexArray(text.getMesh());
-		GL20.glEnableVertexAttribArray(0);
-		GL20.glEnableVertexAttribArray(1);
+		text.getFont().getTextureAtlas().bind();
+		text.getData().bind();
 		shader.loadTransparency(text.getTransparency());
 		shader.loadColor(text.getColor());
 		shader.loadTranslation(text.getPosition());
-		GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, text.getVertexCount());
-		GL20.glDisableVertexAttribArray(0);
-		GL20.glDisableVertexAttribArray(1);
-		GL30.glBindVertexArray(0);
+		text.getData().draw();
+		text.getData().unbind();
 		endRendering();
 	}
 	

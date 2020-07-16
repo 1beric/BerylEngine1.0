@@ -1,6 +1,8 @@
-package renderEngine.fontMeshCreator;
+package meshCreation.fontMeshCreation;
 
 import java.io.File;
+
+import renderEngine.models.Texture;
 
 /**
  * Represents a font. It holds the font's texture atlas as well as having the
@@ -11,7 +13,7 @@ import java.io.File;
  */
 public class FontType {
 
-	private int textureAtlas;
+	private Texture textureAtlas;
 	private TextMeshCreator loader;
 
 	/**
@@ -24,7 +26,7 @@ public class FontType {
 	 *            - the font file containing information about each character in
 	 *            the texture atlas.
 	 */
-	public FontType(int textureAtlas, File fontFile) {
+	public FontType(Texture textureAtlas, File fontFile) {
 		this.textureAtlas = textureAtlas;
 		this.loader = new TextMeshCreator(fontFile);
 	}
@@ -32,7 +34,7 @@ public class FontType {
 	/**
 	 * @return The font texture atlas.
 	 */
-	public int getTextureAtlas() {
+	public Texture getTextureAtlas() {
 		return textureAtlas;
 	}
 

@@ -32,13 +32,11 @@ import renderEngine.postProcessing.gaussianBlur.HorizontalGaussianBlur;
 import tools.Interpolators;
 import tools.input.BerylMouse;
 import tools.interfaces.Updatable;
+import tools.math.BerylMath;
 import tools.math.BerylVector;
 
 public class Scene implements Updatable {
 
-	// TODO
-
-	
 	private List<Entity> entities;
 	private List<BerylUC> uComponents;
 	private List<BerylRC> rComponents;
@@ -178,14 +176,17 @@ public class Scene implements Updatable {
 		
 		new SkyAnimator(new Entity("Skybox", this));
 		
-		new LightRC(new BerylVector(-1,-1,-1), BerylVector.one(3), new Entity("Light", this));
+		LightRC light = new LightRC(new Entity("Light", this));
+		light.setDirection(new BerylVector(-1,-.5f,-.3f).normalize());
+		light.setColor(BerylMath.hexToRGB("FFF8F0"));
 		
 		new GUIHandler(new Entity("GUIs", this));
 		
 		new Debugger(new Entity("Debug Element", this));
 		
 		Entity ppes = new Entity("Post Processing Effects", this);
-		new ContrastEffect(0.2f, ppes);
+		new ContrastEffect(0.3f, ppes);
+		new BloomEffect(3, 1.5f, ppes);
 		
 		Entity obj = new Entity("Object", this);
 		new ObjectController(obj);

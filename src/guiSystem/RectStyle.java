@@ -1,5 +1,5 @@
 package guiSystem;
 
-public enum RectStyles {
+public enum RectStyle {
 	TL,TR,BL,BR,CC,TC,CL,CR,BC
 }

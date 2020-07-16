@@ -10,7 +10,9 @@ public class BerylInputSystem {
 		BerylMouse.init(MasterRenderer.getProjectionMatrix(), BerylVector.zero(), BerylVector.zero());
 	}
 	
-	public static void update() {
+	public static void update(BerylVector pos, BerylVector size) {
+		BerylMouse.setRectPos(pos);
+		BerylMouse.setRectSize(size);
 		BerylKeyboard.update();
 		BerylMouse.update();
 	}

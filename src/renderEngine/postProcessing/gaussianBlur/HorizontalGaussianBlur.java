@@ -1,11 +1,11 @@
 package renderEngine.postProcessing.gaussianBlur;
 
 import models.data.Entity;
-import renderEngine.BerylDisplay;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
 import renderEngine.shaders.HorizontalGaussianBlurShader;
 import renderEngine.shaders.ShaderProgram;
+import tools.BerylDisplay;
 
 public class HorizontalGaussianBlur extends PostProcessingEffect {
 
@@ -16,7 +16,7 @@ public class HorizontalGaussianBlur extends PostProcessingEffect {
 	@Override
 	public void loadUniforms(ShaderProgram shader) {
 		HorizontalGaussianBlurShader hgbShader = (HorizontalGaussianBlurShader) shader;
-		hgbShader.loadTargetWidth(BerylDisplay.getVpWidth());
+		hgbShader.loadTargetWidth(BerylDisplay.getVPWidth());
 	}
 
 }

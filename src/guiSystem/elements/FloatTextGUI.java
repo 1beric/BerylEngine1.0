@@ -4,7 +4,7 @@
 package guiSystem.elements;
 
 import models.data.Entity;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import tools.BerylFormattingTools;
 import tools.math.BerylVector;
 
@@ -28,7 +28,7 @@ public class FloatTextGUI extends TextGUI {
 	 * @param parent
 	 */
 	public FloatTextGUI(float value, float fontSize, String font, BerylVector pos, float maxLineLength, String posType,
-			RectStyles rectStyle, Mesh2RC parent, Entity entity) {
+			RectStyle rectStyle, Mesh2RC parent, Entity entity) {
 		super("", fontSize, font, pos, maxLineLength, posType, rectStyle, parent, entity);
 		init();
 		setValue(value);

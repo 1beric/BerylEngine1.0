@@ -1,7 +1,8 @@
-package renderEngine.fontMeshCreator;
+package meshCreation.fontMeshCreation;
 
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import guiSystem.elements.TextGUI;
+import renderEngine.models.RawModel;
 import tools.math.BerylVector;
 
 /**
@@ -15,8 +16,8 @@ public class GUIText {
 	private String textString;
 	private float fontSize;
 
-	private int textMeshVao;
-	private int vertexCount;
+	private RawModel data;
+	
 	private BerylVector color = new BerylVector(0f, 0f, 0f);
 	private float transparency = 1;
 
@@ -28,7 +29,7 @@ public class GUIText {
 
 	private boolean centerText = false;
 	private boolean centerTextVertically = false;
-	private RectStyles style;
+	private RectStyle style;
 
 	/**
 	 * Creates a new text, loads the text's quads into a VAO, and adds the text
@@ -66,6 +67,7 @@ public class GUIText {
 		this.style = data.getRectStyle();
 		this.color = data.getColor();
 		this.transparency = data.getTransparency();
+		this.data = null;
 	}
 
 	/**
@@ -119,14 +121,6 @@ public class GUIText {
 	}
 
 	/**
-	 * @return the ID of the text's VAO, which contains all the vertex data for
-	 *         the quads on which the text will be rendered.
-	 */
-	public int getMesh() {
-		return textMeshVao;
-	}
-
-	/**
 	 * Set the VAO and vertex count for this text.
 	 * 
 	 * @param vao
@@ -135,16 +129,12 @@ public class GUIText {
 	 * @param verticesCount
 	 *            - the total number of vertices in all of the quads.
 	 */
-	public void setMeshInfo(int vao, int verticesCount) {
-		this.textMeshVao = vao;
-		this.vertexCount = verticesCount;
+	public void setMeshInfo(RawModel model) {
+		this.data = model;
 	}
-
-	/**
-	 * @return The total number of vertices of all the text's quads.
-	 */
-	public int getVertexCount() {
-		return this.vertexCount;
+	
+	public RawModel getData() {
+		return data;
 	}
 
 	/**
@@ -180,19 +170,19 @@ public class GUIText {
 	}
 	
 	protected boolean isTop() {
-		return style == RectStyles.TC || style == RectStyles.TL || style == RectStyles.TR;
+		return style == RectStyle.TC || style == RectStyle.TL || style == RectStyle.TR;
 	}
 	
 	protected boolean isBottom() {
-		return style == RectStyles.BC || style == RectStyles.BL || style == RectStyles.BR;
+		return style == RectStyle.BC || style == RectStyle.BL || style == RectStyle.BR;
 	}
 	
 	protected boolean isLeft() {
-		return style == RectStyles.TL || style == RectStyles.CL || style == RectStyles.BL;
+		return style == RectStyle.TL || style == RectStyle.CL || style == RectStyle.BL;
 	}
 	
 	protected boolean isRight() {
-		return style == RectStyles.TR || style == RectStyles.CR || style == RectStyles.BR;
+		return style == RectStyle.TR || style == RectStyle.CR || style == RectStyle.BR;
 	}
 	
 	/**

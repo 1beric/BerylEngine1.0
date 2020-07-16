@@ -106,6 +106,24 @@ public class BerylVector {
 		return copy;
 	}
 	
+	public BerylVector sub(BerylVector toSub) {
+		BerylVector copy = copy();
+		copy.x -= toSub.x;
+		copy.y -= toSub.y;
+		copy.z -= toSub.z;
+		copy.w -= toSub.w;
+		return copy;
+	}
+	
+	public BerylVector sub(float toSub) {
+		BerylVector copy = copy();
+		copy.x -= toSub;
+		copy.y -= toSub;
+		copy.z -= toSub;
+		copy.w -= toSub;
+		return copy;
+	}
+	
 	public BerylVector mult(BerylVector toMult) {
 		BerylVector copy = copy();
 		copy.x *= toMult.x;
@@ -121,6 +139,24 @@ public class BerylVector {
 		copy.y *= toMult;
 		copy.z *= toMult;
 		copy.w *= toMult;
+		return copy;
+	}
+	
+	public BerylVector div(BerylVector toDiv) {
+		BerylVector copy = copy();
+		copy.x /= toDiv.x;
+		copy.y /= toDiv.y;
+		copy.z /= toDiv.z;
+		copy.w /= toDiv.w;
+		return copy;
+	}
+	
+	public BerylVector div(float toDiv) {
+		BerylVector copy = copy();
+		copy.x /= toDiv;
+		copy.y /= toDiv;
+		copy.z /= toDiv;
+		copy.w /= toDiv;
 		return copy;
 	}
 	

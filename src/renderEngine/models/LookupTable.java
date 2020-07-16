@@ -3,7 +3,7 @@ package renderEngine.models;
 import java.util.HashMap;
 import java.util.Map;
 
-import renderEngine.fontMeshCreator.FontType;
+import meshCreation.fontMeshCreation.FontType;
 import tools.BerylFormattingTools;
 
 public class LookupTable {

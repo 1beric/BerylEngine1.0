@@ -1,17 +1,20 @@
 package game.components;
 
-import guiSystem.elements.Mesh2RC;
 import guiSystem.elements.Slider;
 import guiSystem.elements.VectorStack;
+import meshCreation.CubeBuilder;
 import models.components.renderable.Mesh3RC;
 import models.components.updatable.BerylUC;
 import models.components.updatable.PhysicsUC;
 import models.data.Entity;
 import models.data.Material3D;
-import guiSystem.RectStyles;
+
+import org.lwjgl.glfw.GLFW;
+
+import guiSystem.RectStyle;
 import guiSystem.animations.PositionAnimation;
 import renderEngine.models.LookupTable;
-import renderEngine.models.Texture;
+import tools.input.BerylKeyboard;
 import tools.math.BerylVector;
 
 public class ObjectController extends BerylUC {
@@ -33,10 +36,10 @@ public class ObjectController extends BerylUC {
 		
 		getEntity().getTransform().setScale(new BerylVector(10,10,10));
 		Mesh3RC mesh = new Mesh3RC(getEntity());
-		mesh.setData(LookupTable.getRawModel("cabinet").getData());
-		Material3D mat = new Material3D("Cabinet Material", "cabinetColor");
-		mat.setShineDamper(10);
-		mat.setReflectivity(.5f);
+		mesh.setData(CubeBuilder.buildCube().getData());
+		Material3D mat = new Material3D("Cube Material");
+		mat.setShineDamper(1f);
+		mat.setReflectivity(.2f);
 		mesh.setMat(mat);
 		
 		phys = (PhysicsUC) getComponent(PhysicsUC.class);
@@ -49,7 +52,7 @@ public class ObjectController extends BerylUC {
 				new Entity("dresser velocity", getEntity().getScene()));
 		velocityElement.setTransparency(0.5f);
 		velocityElement.setColor(BerylVector.zero());
-		velocityElement.setOriginPoint(RectStyles.CL);
+		velocityElement.setOriginPoint(RectStyle.CL);
 		velocityElement.setActive(false);
 		GUIHandler handler = (GUIHandler)getComponent("GUIs", GUIHandler.class);
 		handler.addGUI("scene", velocityElement);
@@ -73,21 +76,29 @@ public class ObjectController extends BerylUC {
 		zRot.setBounds(new BerylVector(-180,180));
 		zRot.setOnSetValue(rot->this.getEntity().getTransform().getRot().z=rot);
 		
-		Slider scale = guiHandler.getSideSlider(3);
-		scale.setBounds(new BerylVector(0.01f,20.01f));
-		scale.setOnSetValue(s->this.getEntity().getTransform().setScale(new BerylVector(s,s,s)));
+		Slider scaleX = guiHandler.getSideSlider(3);
+		scaleX.setBounds(new BerylVector(0.01f,20.01f));
+		scaleX.setOnSetValue(s->this.getEntity().getTransform().getScale().x = s);
 
+		Slider scaleY = guiHandler.getSideSlider(4);
+		scaleY.setBounds(new BerylVector(0.01f,20.01f));
+		scaleY.setOnSetValue(s->this.getEntity().getTransform().getScale().y = s);
+		
+		Slider scaleZ = guiHandler.getSideSlider(5);
+		scaleZ.setBounds(new BerylVector(0.01f,20.01f));
+		scaleZ.setOnSetValue(s->this.getEntity().getTransform().getScale().z = s);
+		
 		framesPassed = 0;
 	}
 
 	@Override
 	public void onUpdate() {
-//		if (BerylKeyboard.isKeyHeld(Keyboard.KEY_SPACE)) {
-//			phys.addForce(new BerylVector(0,FORCE,0));
-//		}
-//		if (BerylKeyboard.isKeyHeld(Keyboard.KEY_LSHIFT)) {
-//			phys.addForce(new BerylVector(0,-FORCE,0));
-//		}
+		if (BerylKeyboard.isKeyHeld(GLFW.GLFW_KEY_SPACE)) {
+			phys.addForce(new BerylVector(0,FORCE,0));
+		}
+		if (BerylKeyboard.isKeyHeld(GLFW.GLFW_KEY_LEFT_SHIFT)) {
+			phys.addForce(new BerylVector(0,-FORCE,0));
+		}
 	}
 
 	@Override

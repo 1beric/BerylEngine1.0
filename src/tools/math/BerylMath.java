@@ -1,7 +1,7 @@
 package tools.math;
 
-import guiSystem.RectStyles;
-import renderEngine.BerylDisplay;
+import guiSystem.RectStyle;
+import tools.BerylDisplay;
 public class BerylMath {
 
 	/**
@@ -84,7 +84,7 @@ public class BerylMath {
 		return Math.max(l, Math.min(h, x));
 	}
 	
-	public static BerylVector translatePosition(BerylVector pos, BerylVector offset, RectStyles from, RectStyles to) {
+	public static BerylVector translatePosition(BerylVector pos, BerylVector offset, RectStyle from, RectStyle to) {
 		BerylVector out = new BerylVector(pos);
 		if (from == to) return out;
 		switch (from) {

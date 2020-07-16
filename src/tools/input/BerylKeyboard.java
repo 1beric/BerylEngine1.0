@@ -6,7 +6,7 @@ import java.util.List;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
-import renderEngine.BerylDisplay;
+import tools.BerylDisplay;
 
 public class BerylKeyboard {
 

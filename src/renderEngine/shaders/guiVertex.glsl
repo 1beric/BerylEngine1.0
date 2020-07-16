@@ -17,7 +17,4 @@ void main(void){
 	if (guiFlipped > 0.5) {
 		texCoords = vec2(textureCoords.x, 1-textureCoords.y);
 	}
-//	else {
-//		texCoords = vec2((position.x*2.0+1.0)/2.0, 1 - (position.y*2.0+1.0)/2.0);
-//	}
 }

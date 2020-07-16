@@ -1,9 +1,14 @@
 package models.components.renderable;
 
+import guiSystem.RectStyle;
 import models.data.Entity;
 import tools.math.BerylVector;
 
 public class Transform2D extends Transform {
+	
+	private boolean byFullWindow;
+	private Transform2D parentTransform;
+	
 
 	public Transform2D(Entity entity) {
 		super(entity);
@@ -16,5 +21,27 @@ public class Transform2D extends Transform {
 		this.setPos(pos);
 		this.setScale(scale);
 	}
+	
+	private BerylVector calcScreenPos() {
+		
+		
+		
+		return getPos();
+	}
+	
+	public BerylVector calcScreenPos(RectStyle style) {
+		
+		
+		
+		return calcScreenPos();
+	}
+	
+	public BerylVector calcScreenScale() {
+		
+		
+		
+		return getScale();
+	}
+	
 
 }

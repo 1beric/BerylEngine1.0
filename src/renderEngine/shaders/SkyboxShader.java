@@ -1,5 +1,8 @@
 package renderEngine.shaders;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;
@@ -29,10 +32,13 @@ public class SkyboxShader extends ShaderProgram {
 		super.bindAttribute(0, "position");
 	}
 	
-	public void loadBlendFactor(float blend) {
-		super.loadFloat(getUniform("blendFactor"), blend);
+	public void bindTextures(int tex1, int tex2, float factor) {
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex1);
+		GL13.glActiveTexture(GL13.GL_TEXTURE1);
+		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex2);
+		super.loadFloat(getUniform("blendFactor"), factor);
 	}
-	
 	public void connectTextureUnits() {
 		super.loadInt(getUniform("cubeMap1"), 0);
 		super.loadInt(getUniform("cubeMap2"), 1);
@@ -53,9 +59,9 @@ public class SkyboxShader extends ShaderProgram {
 
 	public void loadViewMatrix(BerylVector pos, BerylVector rot) {
 		BerylMatrix matrix = BerylMath.createViewMatrix(pos,rot);
-		matrix.m30 = 0;
-		matrix.m31 = 0;
-		matrix.m32 = 0;
+		matrix.m03 = 0;
+		matrix.m13 = 0;
+		matrix.m23 = 0;
 		matrix = matrix.multiply(BerylMatrix.rotate(rotation,0,1,0));
 		super.loadMatrix(getUniform("viewMatrix"), matrix);
 	}

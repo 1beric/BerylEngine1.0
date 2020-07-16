@@ -6,10 +6,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import meshCreation.Loader;
 import models.data.ModelData;
 import renderEngine.models.RawModel;
 import renderEngine.models.Texture;
-import renderEngine.Loader;
 
 public class PostProcessor {
 

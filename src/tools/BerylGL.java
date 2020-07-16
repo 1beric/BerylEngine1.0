@@ -1,10 +1,11 @@
-package renderEngine;
+package tools;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
+import renderEngine.MasterRenderer;
 import tools.math.BerylVector;
 
 /**

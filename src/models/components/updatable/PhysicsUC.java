@@ -39,7 +39,7 @@ public class PhysicsUC extends BerylUC {
 		velocity = velocity.clampMagnitude(0, maxVelocity);
 		if (velocity.magnitude() < CUTOFF) velocity.mult(0);
 		BerylVector pos = getEntity().getTransform().getPos();
-		pos = pos.add(velocity.mult(BerylTime.getDelta()));
+		getEntity().getTransform().setPos(pos.add(velocity.mult(BerylTime.getDelta())));
 		velocity = velocity.add(acceleration.mult(BerylTime.getDelta() * 0.5f));
 		resetAcceleration();
 	}

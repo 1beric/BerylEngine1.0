@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import meshCreation.Loader;
 import meshCreation.OBJFileLoader;
 import models.data.ModelData;
-import renderEngine.Loader;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
 

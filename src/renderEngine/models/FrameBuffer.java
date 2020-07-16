@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
 
-import renderEngine.BerylDisplay;
-import renderEngine.BerylGL;
+import tools.BerylDisplay;
+import tools.BerylGL;
 
 public class FrameBuffer {
 
@@ -27,11 +27,11 @@ public class FrameBuffer {
 	private int height;
 	private boolean multisample;
 	
-	public FrameBuffer(DepthBuffer dbType) {
+	public FrameBuffer(DepthBuffer dbType, boolean multisample) {
 		this.width = BerylDisplay.WIDTH;
 		this.height = BerylDisplay.HEIGHT;
 		this.dbType = dbType;
-		this.multisample = true;
+		this.multisample = multisample;
 		frameBuffer = createFrameBuffer();
 		tex = createTextureAttachment();
 		switch (dbType) {
@@ -74,7 +74,7 @@ public class FrameBuffer {
 		GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, this.frameBuffer);
 		GL11.glDrawBuffer(GL11.GL_BACK);
 		GL30.glBlitFramebuffer(0, 0, width, height, 
-				0, 0, BerylDisplay.getVpWidth(), BerylDisplay.getVpWidth(), 
+				0, 0, BerylDisplay.getVPWidth(), BerylDisplay.getVPWidth(), 
 				GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT, 
 				GL11.GL_NEAREST);
 		this.unbind();

@@ -15,7 +15,7 @@ public class ImageRenderer {
 	}
 	
 	public ImageRenderer(boolean toFBO) {
-		this.fbo = toFBO ? new FrameBuffer(DepthBuffer.DEPTH_RENDER_BUFFER) : null;
+		this.fbo = toFBO ? new FrameBuffer(DepthBuffer.DEPTH_RENDER_BUFFER, false) : null;
 	}
 
 	public Texture render() {

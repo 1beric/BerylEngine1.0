@@ -3,26 +3,27 @@ import java.io.File;
 
 import org.lwjgl.Version;
 
+import editor.Editor;
 import guiSystem.animations.Animation;
 import guiSystem.elements.Mesh2RC;
 import guiSystem.elements.TextGUI;
+import meshCreation.Loader;
+import meshCreation.fontMeshCreation.FontType;
+import meshCreation.fontMeshCreation.GUIText;
+import meshCreation.fontMeshCreation.TextMeshData;
 import models.Scene;
+import models.components.renderable.Transform2D;
 import models.data.ModelData;
-import renderEngine.BerylDisplay;
-import renderEngine.BerylGL;
-import renderEngine.Loader;
 import renderEngine.MasterRenderer;
-import renderEngine.fontMeshCreator.FontType;
-import renderEngine.fontMeshCreator.GUIText;
-import renderEngine.fontMeshCreator.TextMeshData;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
-import renderEngine.models.Texture;
 import settings.Constants;
 import settings.PreloadLookupTable;
+import tools.BerylDisplay;
+import tools.BerylGL;
 import tools.BerylTime;
 import tools.input.BerylInputSystem;
-import tools.math.BerylVector;
+import tools.input.BerylMouse;
 
 public class BerylApplication {
 
@@ -33,6 +34,7 @@ public class BerylApplication {
 	private static final String SCENE_FILE = "src/game/basic.bscn";
 	
 	private Scene scene;
+	private Editor editor;
 	
 	public void run() {
 		System.out.println("Hello LWJGL " + Version.getVersion() + "!");
@@ -61,7 +63,8 @@ public class BerylApplication {
 		MasterRenderer.init();
 		// Initialize the Input System
 		BerylInputSystem.init();
-		// Initialize the FrameBuffer
+		// Initialize the Editor
+		editor = new Editor();
 		// Construct the scene and initialize it from a .bscn file
 		scene = new Scene();
 		scene.initFromFile(SCENE_FILE);
@@ -77,7 +80,8 @@ public class BerylApplication {
 	}
 	
 	private void logicUpdate() {
-		BerylInputSystem.update();
+		Transform2D t = editor.getGameView().getTransform();
+		BerylInputSystem.update(t.getPos(),t.getScale());
 		BerylTime.updateDelta();
 		scene.onUpdate();
 		scene.onLateUpdate();
@@ -93,11 +97,11 @@ public class BerylApplication {
 	
 	
 	private void renderByFBO() {
-		Texture tex = MasterRenderer.render(scene);
+		editor.getGameView().setTexture(MasterRenderer.render(scene));
 		
 		
 		// final render
-		MasterRenderer.render(tex, BerylVector.zero(), BerylVector.one(2));
+		MasterRenderer.render(editor.getGameView());
 	}
 
 	private void close() {
@@ -118,7 +122,7 @@ public class BerylApplication {
 		if (text.isUpdated()) {
 			if (LookupTable.containsRawModel(text)) Loader.unloadVAO(LookupTable.getRawModel(text).getVaoID());
 			if (!LookupTable.containsFont(text.getFont())) 
-				LookupTable.putFont(text.getFont(), new FontType(Loader.loadTexture(text.getFont()).getTextureID(), new File("res/" + text.getFont() + ".fnt")));
+				LookupTable.putFont(text.getFont(), new FontType(Loader.loadTexture(text.getFont()), new File("res/" + text.getFont() + ".fnt")));
 			FontType font = LookupTable.getFont(text.getFont());
 			GUIText guiText = new GUIText(text, font);
 			TextMeshData data = font.loadText(guiText);

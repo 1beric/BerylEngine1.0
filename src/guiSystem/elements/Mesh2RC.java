@@ -7,8 +7,8 @@ import models.components.renderable.BerylRC;
 import models.components.renderable.Transform2D;
 import models.data.Entity;
 import models.data.Material2D;
-import renderEngine.BerylDisplay;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
+import tools.BerylDisplay;
 import tools.input.BerylMouse;
 import tools.interfaces.MouseEventHandler;
 import tools.math.BerylMath;
@@ -47,8 +47,8 @@ public abstract class Mesh2RC extends BerylRC {
 	
 	private StorageType posStorageType;
 	private StorageType scaleStorageType;
-	private RectStyles originPoint;
-	private RectStyles fromParentPoint;
+	private RectStyle originPoint;
+	private RectStyle fromParentPoint;
 	 
 	public Mesh2RC(BerylVector pos, BerylVector scale, String posType, String scaleType, Mesh2RC parent, Entity entity) {
 		super(entity);
@@ -62,8 +62,8 @@ public abstract class Mesh2RC extends BerylRC {
 		this.setScale(scale, scaleType);
 		this.mat = new Material2D(); // default mat
 		
-		this.originPoint 	= RectStyles.TL;
-		this.fromParentPoint= (parent != null) ? parent.getRectStyle() : RectStyles.TL;
+		this.originPoint 	= RectStyle.TL;
+		this.fromParentPoint= (parent != null) ? parent.getRectStyle() : RectStyle.TL;
 		this.onMouseClicked = () -> {};
 		this.onMouseEntered = () -> {};
 		this.onMouseExited  = () -> {};
@@ -79,7 +79,7 @@ public abstract class Mesh2RC extends BerylRC {
 	@Override
 	public String toString() {
 		return "\n\t" + this.getClass().getSimpleName() + ": " + name + 
-				"\n\tPos: " + calcScreenPos(RectStyles.CC) +
+				"\n\tPos: " + calcScreenPos(RectStyle.CC) +
 				"\n\tScale: " + calcScreenScale() +
 				"\n\tActive: " + isActive() +
 				"\n\tTransparency: " + getTransparency();
@@ -136,7 +136,7 @@ public abstract class Mesh2RC extends BerylRC {
 	
 	public boolean contains(BerylVector point) {
 		BerylVector scale = calcScreenScale();
-		BerylVector pos   = calcScreenPos(RectStyles.CC);
+		BerylVector pos   = calcScreenPos(RectStyle.CC);
 		return (point.x < pos.x + scale.x/2) &&
 				(point.x > pos.x - scale.x/2) && 
 				(point.y < pos.y + scale.y/2) &&
@@ -187,7 +187,7 @@ public abstract class Mesh2RC extends BerylRC {
 		return null;
 	}
 	
-	public BerylVector calcScreenPos(RectStyles placement) {
+	public BerylVector calcScreenPos(RectStyle placement) {
 		return BerylMath.translatePosition(
 				calcScreenPos(),
 				calcScreenScale().mult(0.5f),
@@ -434,15 +434,15 @@ public abstract class Mesh2RC extends BerylRC {
 		return children;
 	}
 
-	public RectStyles getRectStyle() {
+	public RectStyle getRectStyle() {
 		return originPoint;
 	}
 
 	public void setOriginPoint(String s) {
-		originPoint = RectStyles.valueOf(s);
+		originPoint = RectStyle.valueOf(s);
 	}
 	
-	public void setOriginPoint(RectStyles s) {
+	public void setOriginPoint(RectStyle s) {
 		originPoint = s;
 	}
 
@@ -541,14 +541,14 @@ public abstract class Mesh2RC extends BerylRC {
 	/**
 	 * @return the fromParentPoint
 	 */
-	public RectStyles getFromParentPoint() {
+	public RectStyle getFromParentPoint() {
 		return fromParentPoint;
 	}
 
 	/**
 	 * @param fromParentPoint the fromParentPoint to set
 	 */
-	public void setFromParentPoint(RectStyles fromParentPoint) {
+	public void setFromParentPoint(RectStyle fromParentPoint) {
 		this.fromParentPoint = fromParentPoint;
 	}
 

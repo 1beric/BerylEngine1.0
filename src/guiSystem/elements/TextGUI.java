@@ -1,9 +1,9 @@
 package guiSystem.elements;
 
 import models.data.Entity;
-import renderEngine.BerylDisplay;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import settings.Constants;
+import tools.BerylDisplay;
 import tools.math.BerylVector;
 
 public class TextGUI extends Mesh2RC {
@@ -23,7 +23,7 @@ public class TextGUI extends Mesh2RC {
 			BerylVector pos, 
 			float maxLineLength, 
 			String posType,
-			RectStyles rectStyle, 
+			RectStyle rectStyle, 
 			Mesh2RC parent,
 			Entity entity) {
 		super(pos, new BerylVector(maxLineLength, 1f), posType, "percent", null, entity);
@@ -58,8 +58,8 @@ public class TextGUI extends Mesh2RC {
 		this.fontSize 	= fontSize;
 		this.font 		= font;
 		this.scaleOnHeight = true;
-		this.setOriginPoint(RectStyles.CC);
-		this.setFromParentPoint(RectStyles.CC);
+		this.setOriginPoint(RectStyle.CC);
+		this.setFromParentPoint(RectStyle.CC);
 		parent.getTexts().add(this);
 	}
 	
@@ -80,8 +80,8 @@ public class TextGUI extends Mesh2RC {
 		this.fontSize 	= fontSize;
 		this.font 		= DEFAULT_FONT;
 		this.scaleOnHeight = true;
-		this.setOriginPoint(RectStyles.CC);
-		this.setFromParentPoint(RectStyles.CC);
+		this.setOriginPoint(RectStyle.CC);
+		this.setFromParentPoint(RectStyle.CC);
 		parent.getTexts().add(this);
 	}
 	
@@ -101,8 +101,8 @@ public class TextGUI extends Mesh2RC {
 		this.fontSize 	= fontSize;
 		this.font 		= DEFAULT_FONT;
 		this.scaleOnHeight = true;
-		this.setOriginPoint(RectStyles.CC);
-		this.setFromParentPoint(RectStyles.CC);
+		this.setOriginPoint(RectStyle.CC);
+		this.setFromParentPoint(RectStyle.CC);
 		parent.getTexts().add(this);
 	}
 
@@ -140,7 +140,7 @@ public class TextGUI extends Mesh2RC {
 	}
 
 	@Override
-	public void setOriginPoint(RectStyles s) {
+	public void setOriginPoint(RectStyle s) {
 		super.setOriginPoint(s);
 		setFromParentPoint(s);
 	}
@@ -200,18 +200,18 @@ public class TextGUI extends Mesh2RC {
 	 * @return the centered
 	 */
 	public boolean isCentered() {
-		return getRectStyle() == RectStyles.CC ||
-				getRectStyle() == RectStyles.TC ||
-				getRectStyle() == RectStyles.BC;
+		return getRectStyle() == RectStyle.CC ||
+				getRectStyle() == RectStyle.TC ||
+				getRectStyle() == RectStyle.BC;
 	}
 
 	/**
 	 * @return the centeredVertically
 	 */
 	public boolean isCenteredVertically() {
-		return getRectStyle() == RectStyles.CC ||
-				getRectStyle() == RectStyles.CL ||
-				getRectStyle() == RectStyles.CR;
+		return getRectStyle() == RectStyle.CC ||
+				getRectStyle() == RectStyle.CL ||
+				getRectStyle() == RectStyle.CR;
 	}
 
 	/**

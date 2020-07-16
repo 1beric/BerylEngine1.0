@@ -1,7 +1,7 @@
 package guiSystem.elements;
 
 import models.data.Entity;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import tools.input.BerylMouse;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
@@ -61,7 +61,7 @@ public class ResizeableRect extends Rect {
 		if (maintainAspectRatio) {
 			// updateBoth
 		} else {
-			RectStyles cursorPoint = getMousePoint();
+			RectStyle cursorPoint = getMousePoint();
 //			cursor.getPos().x = BerylMath.clamp((MouseModule.getScreenRay().x-calcScreenPos().x)/calcScreenScale().x, -.5f, .5f);
 		}
 	}
@@ -71,20 +71,20 @@ public class ResizeableRect extends Rect {
 		trackingMouse = false;
 	}
 	
-	private RectStyles getMousePoint() {
+	private RectStyle getMousePoint() {
 		BerylVector point = BerylMouse.getScreenRay();
 		BerylVector span  = calcScreenScale().mult(0.5f).add(-GRABBABLE_PIXELS);
-		BerylVector pos   = calcScreenPos(RectStyles.CC);
-		if (!contains(point)) return RectStyles.CC;
-		if (point.x > pos.x + span.x && point.y > pos.y + span.y) return RectStyles.TR;
-		else if (point.x > pos.x + span.x && point.y < pos.y - span.y) return RectStyles.BR;
-		else if (point.x > pos.x + span.x) return RectStyles.CR;
-		else if (point.x < pos.x - span.x && point.y > pos.y + span.y) return RectStyles.TL;
-		else if (point.x < pos.x - span.x && point.y < pos.y - span.y) return RectStyles.BL;
-		else if (point.x < pos.x - span.x) return RectStyles.CL;
-		else if (point.y > pos.y + span.y) return RectStyles.TC;
-		else if (point.y < pos.y - span.y) return RectStyles.BC;
-		else return RectStyles.CC;
+		BerylVector pos   = calcScreenPos(RectStyle.CC);
+		if (!contains(point)) return RectStyle.CC;
+		if (point.x > pos.x + span.x && point.y > pos.y + span.y) return RectStyle.TR;
+		else if (point.x > pos.x + span.x && point.y < pos.y - span.y) return RectStyle.BR;
+		else if (point.x > pos.x + span.x) return RectStyle.CR;
+		else if (point.x < pos.x - span.x && point.y > pos.y + span.y) return RectStyle.TL;
+		else if (point.x < pos.x - span.x && point.y < pos.y - span.y) return RectStyle.BL;
+		else if (point.x < pos.x - span.x) return RectStyle.CL;
+		else if (point.y > pos.y + span.y) return RectStyle.TC;
+		else if (point.y < pos.y - span.y) return RectStyle.BC;
+		else return RectStyle.CC;
 	}
 
 }

@@ -1,8 +1,8 @@
 package guiSystem.elements;
 
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import models.data.Entity;
-import renderEngine.BerylDisplay;
+import tools.BerylDisplay;
 import tools.input.BerylMouse;
 import tools.math.BerylVector;
 
@@ -12,16 +12,16 @@ public class ParentPosController extends Rect {
 	
 	public ParentPosController(Mesh2RC parent, Entity entity) {
 		super(BerylVector.zero(), new BerylVector(1,.1f), "percent", "percent", parent, entity);
-		setOriginPoint(RectStyles.TC);
-		setFromParentPoint(RectStyles.TC);
+		setOriginPoint(RectStyle.TC);
+		setFromParentPoint(RectStyle.TC);
 		setTransparency(0);
 		trackingMouse = false;
 	}
 	
 	public ParentPosController(float height, Mesh2RC parent, Entity entity) {
 		super(BerylVector.zero(), new BerylVector(1,height), "percent", "percent", parent, entity);
-		setOriginPoint(RectStyles.TC);
-		setFromParentPoint(RectStyles.TC);
+		setOriginPoint(RectStyle.TC);
+		setFromParentPoint(RectStyle.TC);
 		setTransparency(0);
 		trackingMouse = false;
 	}

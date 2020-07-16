@@ -1,7 +1,7 @@
 package guiSystem.elements;
 
 import models.data.Entity;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import tools.BerylFormattingTools;
 import tools.math.BerylVector;
 
@@ -25,10 +25,10 @@ public class VectorStack extends Mesh2RC {
 	
 	private void init(BerylVector vector) {
 		round = 3;
-		x = new TextGUI("x: " + BerylFormattingTools.format(vector.x, round), 2.5f, "candara", new BerylVector(.1f, .35f ), .5f, "percent", RectStyles.CL, this, null);
-		y = new TextGUI("y: " + BerylFormattingTools.format(vector.y, round), 2.5f, "candara", new BerylVector(.1f, .125f), .5f, "percent", RectStyles.CL, this, null);
-		z = new TextGUI("z: " + BerylFormattingTools.format(vector.z, round), 2.5f, "candara", new BerylVector(.1f,-.125f), .5f, "percent", RectStyles.CL, this, null);
-		w = new TextGUI("w: " + BerylFormattingTools.format(vector.w, round), 2.5f, "candara", new BerylVector(.1f,-.35f ), .5f, "percent", RectStyles.CL, this, null);
+		x = new TextGUI("x: " + BerylFormattingTools.format(vector.x, round), 2.5f, "candara", new BerylVector(.1f, .35f ), .5f, "percent", RectStyle.CL, this, null);
+		y = new TextGUI("y: " + BerylFormattingTools.format(vector.y, round), 2.5f, "candara", new BerylVector(.1f, .125f), .5f, "percent", RectStyle.CL, this, null);
+		z = new TextGUI("z: " + BerylFormattingTools.format(vector.z, round), 2.5f, "candara", new BerylVector(.1f,-.125f), .5f, "percent", RectStyle.CL, this, null);
+		w = new TextGUI("w: " + BerylFormattingTools.format(vector.w, round), 2.5f, "candara", new BerylVector(.1f,-.35f ), .5f, "percent", RectStyle.CL, this, null);
 		
 		addText(x);
 		addText(y);

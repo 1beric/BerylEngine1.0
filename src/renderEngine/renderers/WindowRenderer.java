@@ -1,4 +1,4 @@
-package renderEngine.gameView;
+package renderEngine.renderers;
 
 
 import org.lwjgl.opengl.GL11;
@@ -6,51 +6,55 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import editor.Window;
+import meshCreation.Loader;
 import models.data.ModelData;
 import renderEngine.models.RawModel;
-import renderEngine.models.Texture;
-import renderEngine.shaders.GameViewShader;
-import renderEngine.Loader;
+import renderEngine.shaders.WindowShader;
+import tools.math.BerylMath;
 
-public class GameViewRenderer {
+public class WindowRenderer {
 
 	private final RawModel MODEL;
-	private GameViewShader gameViewShader;
+	private WindowShader shader;
 	
-	public GameViewRenderer() {
+	public WindowRenderer() {
 		MODEL = Loader.loadToVAO(new ModelData(
 				new float[] { -1,  1,  -1, -1,   1,  1,   1, -1 }, 
 				2));
-		this.gameViewShader = new GameViewShader();
+		this.shader = new WindowShader();
 	}
 	
-	public void render(Texture tex) {
+	public void render(Window window) {
 		start();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		tex.bind();
-		
+		window.getTexture().bind();
+		shader.loadTransformationMatrix(
+				BerylMath.createTransformationMatrix(
+						window.getTransform().getPos(), 
+						window.getTransform().getScale()));
 		GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, 4);
 		
-		tex.unbind();
+		window.getTexture().unbind();
 		end();
 	}
 	
 	private void start() {
-		gameViewShader.bind();
+		shader.bind();
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL30.glBindVertexArray(MODEL.getVaoID());
 		GL20.glEnableVertexAttribArray(0);
 	}
 	
 	private void end() {
-		gameViewShader.unbind();
+		shader.unbind();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL20.glDisableVertexAttribArray(0);
 		GL30.glBindVertexArray(0);
 	}
 	
 	public void cleanUp() {
-		gameViewShader.cleanUp();
+		shader.cleanUp();
 	}
 
 }

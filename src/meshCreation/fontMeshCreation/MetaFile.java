@@ -1,4 +1,4 @@
-package renderEngine.fontMeshCreator;
+package meshCreation.fontMeshCreation;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import renderEngine.BerylDisplay;
+import tools.BerylDisplay;
 
 /**
  * Provides functionality for getting the values from a font file.

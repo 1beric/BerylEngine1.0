@@ -1,4 +1,4 @@
-package renderEngine.fontMeshCreator;
+package meshCreation.fontMeshCreation;
 
 import java.io.File;
 import java.util.ArrayList;

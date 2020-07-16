@@ -1,19 +1,41 @@
-
-Camera,CameraRC
-Camera,CameraController
-
-OBJ,ObjectController
-
-FPSRect,FPSUpdater
-
-
-
-Scripts,GUI
-# Scripts,FullTerrain
-Scripts,FPSUpdater
-Scripts,SkyAnimator
-# Scripts,SaveSystem
-# Scripts,Gravity
-# Scripts,Printer
-Scripts,CameraUpdater
-Scripts,Recompiler
+Scene {
+	name="basic"
+}
+Entity {
+	name="Cam";
+	name="Light";
+	name="Skybox";
+	name="GUIs";
+	name="Debug Printer";
+	name="Post Processing Effects";
+	name="Cabinet";
+}
+CameraController {
+	entity="Cam"
+}
+SkyAnimator {
+	entity="Skybox"
+}
+LightRC {
+	dir=BerylVector(-1,-1,-1),
+	color=BerylVector(1,1,1),
+	entity="Light"
+}
+FPSUpdater {
+	entity="GUIs"
+}
+GUIHandler {
+	entity="GUIs"
+}
+Debugger {
+	entity="Debug Printer"
+}
+ContrastEffect {
+	entity="Post Processing Effects"
+}
+ObjectController {
+	entity="Cabinet"
+}
+PhysicsUC {
+	entity="Cabinet"
+}

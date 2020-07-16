@@ -1,21 +1,20 @@
 package renderEngine.shaders;
 
-public class GameViewShader extends ShaderProgram {
+public class SimpleImageShader extends ShaderProgram {
 
 	private final static String VERTEX_FILE = "src/renderEngine/shaders/simpleVertex.glsl";
 	private final static String FRAGMENT_FILE = "src/renderEngine/shaders/simpleImageFragment.glsl";
 	
-
-	public GameViewShader() {
+	public SimpleImageShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);
+	}
+
+	@Override
+	public void bindAttributes() {
+		bindAttribute(0, "position");
 	}
 
 	@Override
 	public void addAllUniforms() { }
 
-	@Override
-	public void bindAttributes() {
-		super.bindAttribute(0, "position");
-	}
-	
 }

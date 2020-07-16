@@ -84,7 +84,7 @@ public class CameraController extends BerylUC {
 
 	private void resetCamera() {
 		distFromCenter = 50;
-		centerPoint.mult(0);
+		centerPoint = centerPoint.mult(0);
 		cam.setYaw(0);
 		cam.setPitch(50);
 	}

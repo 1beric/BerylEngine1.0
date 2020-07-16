@@ -1,4 +1,4 @@
-package renderEngine.fontMeshCreator;
+package meshCreation.fontMeshCreation;
 
 /**
  * Simple data structure class holding information about a certain glyph in the

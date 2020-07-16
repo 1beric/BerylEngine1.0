@@ -10,19 +10,11 @@ public class LightRC extends BerylRC {
 	private boolean point;
 	private BerylVector direction;
 	
-	public LightRC(BerylVector dir, BerylVector color, Entity entity) {
+	public LightRC(Entity entity) {
 		super(entity);
-		this.color = color;
+		this.color = BerylVector.zero();
 		this.attenuation = new BerylVector(1,0,0);
-		this.setPoint(false);
-		setDirection(dir);
-	}
-	public LightRC(BerylVector pos, BerylVector color, BerylVector attenuation, Entity entity) {
-		super(entity);
-		entity.getTransform().setPos(pos);
-		this.color = color;
-		this.attenuation = attenuation;
-		this.setPoint(true);
+		this.direction = BerylVector.negY().add(BerylVector.negX());
 	}
 	
 	/**

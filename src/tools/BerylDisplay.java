@@ -1,4 +1,4 @@
-package renderEngine;
+package tools;
 
 import java.nio.IntBuffer;
 
@@ -11,6 +11,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
+import meshCreation.Loader;
 import renderEngine.models.TextureData;
 import tools.input.BerylInputSystem;
 
@@ -172,7 +173,7 @@ public class BerylDisplay {
 	/**
 	 * @return the vpWidth
 	 */
-	public static int getVpWidth() {
+	public static int getVPWidth() {
 		return vpWidth;
 	}
 
@@ -186,7 +187,7 @@ public class BerylDisplay {
 	/**
 	 * @return the vpHeight
 	 */
-	public static int getVpHeight() {
+	public static int getVPHeight() {
 		return vpHeight;
 	}
 

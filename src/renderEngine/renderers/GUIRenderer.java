@@ -1,4 +1,4 @@
-package renderEngine.gui;
+package renderEngine.renderers;
 
 import java.util.List;
 
@@ -7,34 +7,67 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import guiSystem.elements.Mesh2RC;
 import guiSystem.elements.TextGUI;
+import meshCreation.Loader;
+import meshCreation.fontMeshCreation.GUIText;
 import models.data.ModelData;
+import renderEngine.models.FrameBuffer;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
+import renderEngine.models.Texture;
+import renderEngine.postProcessing.ImageRenderer;
+import renderEngine.models.FrameBuffer.DepthBuffer;
 import renderEngine.shaders.GUIShader;
+import renderEngine.shaders.SimpleImageShader;
 import tools.math.BerylMath;
 import tools.math.BerylVector;
-import renderEngine.Loader;
-import renderEngine.fontMeshCreator.GUIText;
-import renderEngine.fontRendering.FontRenderer;
 
 public class GUIRenderer {
 
+	private FrameBuffer fbo;
 	private final RawModel CC;
 	private GUIShader shader;
 	private FontRenderer fontRenderer;
+	
+	private final RawModel MODEL;
+	private ImageRenderer imageRenderer;
+	private SimpleImageShader imageShader;
 	
 	public GUIRenderer() {
 		CC = Loader.loadToVAO(new ModelData(
 				new float[] { -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f }, 
 				new float[] { 	  0,	1,	   0,	  0,	1,	  1,	1,	   0 }));
+		MODEL = Loader.loadToVAO(new ModelData(
+				new float[] { -1,  1,  -1, -1,   1,  1,   1, -1 }, 
+				2));
 		this.shader = new GUIShader();
 		this.fontRenderer = new FontRenderer();
+		
+		this.imageRenderer = new ImageRenderer(false);
+		this.imageShader = new SimpleImageShader();
+		this.fbo = new FrameBuffer(DepthBuffer.DEPTH_RENDER_BUFFER, false);
 	}
 	
-	public void render(List<Mesh2RC> meshes) {
+	public Texture render(List<Mesh2RC> meshes, Texture scene) {
+		fbo.bind();
+		
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL30.glBindVertexArray(MODEL.getVaoID());
+		GL20.glEnableVertexAttribArray(0);
+		
+		imageShader.bind();
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		scene.bind();
+		imageRenderer.render();
+		scene.unbind();
+		imageShader.unbind();
+		
+		GL20.glDisableVertexAttribArray(0);
+		GL30.glBindVertexArray(0);
+		
+		
 		shader.bind();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -47,11 +80,14 @@ public class GUIRenderer {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL11.GL_BLEND);
 		shader.unbind();
+		
+		fbo.unbind();
+		return fbo.getTexture();
 	}
 
 	private void renderElement(Mesh2RC gui) {
 		if (gui == null || !gui.isActive()) return;
-		BerylVector pos = gui.calcScreenPos(RectStyles.CC);
+		BerylVector pos = gui.calcScreenPos(RectStyle.CC);
 		BerylVector scale = gui.calcScreenScale();
 		shader.loadPosAndScale(pos,scale);
 		prepareMaterial(gui);
@@ -71,7 +107,7 @@ public class GUIRenderer {
 		GUIText guiText = new GUIText(text, LookupTable.getFont(text.getFont()));
 		RawModel model = LookupTable.getRawModel(text);
 		if (model!=null) {
-			guiText.setMeshInfo(model.getVaoID(), model.getVertexCount());
+			guiText.setMeshInfo(model);
 			fontRenderer.render(guiText);
 		}
 		GL11.glEnable(GL11.GL_BLEND);
@@ -96,6 +132,11 @@ public class GUIRenderer {
 	
 	public void cleanUp() {
 		shader.cleanUp();
+		fontRenderer.cleanUp();
+
+		fbo.cleanUp();
+		imageRenderer.cleanUp();
+		imageShader.cleanUp();
 	}
 
 }

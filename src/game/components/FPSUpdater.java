@@ -5,8 +5,8 @@ import guiSystem.elements.Rect;
 import guiSystem.elements.TextGUI;
 import models.components.updatable.BerylUC;
 import models.data.Entity;
-import renderEngine.BerylDisplay;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
+import tools.BerylDisplay;
 import tools.BerylTime;
 import tools.math.BerylVector;
 
@@ -28,10 +28,10 @@ public class FPSUpdater extends BerylUC {
 		background = new Rect(BerylVector.zero(), new BerylVector(BerylDisplay.WIDTH*0.1f,BerylDisplay.HEIGHT*0.05f), "percent", "pixel", getEntity());
 		background.setTransparency(0.5f);
 		background.setColor(new BerylVector(0));
-		background.setOriginPoint(RectStyles.TL);
+		background.setOriginPoint(RectStyle.TL);
 		
 		text = new TextGUI("FPS: ", 12, new BerylVector(0.1f, 0), "percent", background, null);
-		text.setOriginPoint(RectStyles.CL);
+		text.setOriginPoint(RectStyle.CL);
 		text.setColor(new BerylVector(1));
 		framesPassed = 0;
 	}

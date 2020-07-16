@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL13;
 
 import models.components.renderable.LightRC;
 import renderEngine.models.Texture;
-import settings.Constants;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;

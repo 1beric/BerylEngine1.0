@@ -1,4 +1,4 @@
-package renderEngine;
+package meshCreation;
 
 import java.io.FileInputStream;
 import java.nio.ByteBuffer;

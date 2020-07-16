@@ -1,7 +1,7 @@
 package guiSystem.elements;
 
 import models.data.Entity;
-import guiSystem.RectStyles;
+import guiSystem.RectStyle;
 import tools.math.BerylVector;
 
 public class CustomTargetRect extends Rect {
@@ -31,7 +31,7 @@ public class CustomTargetRect extends Rect {
 	@Override
 	public boolean contains(BerylVector point) {
 		BerylVector scale = calcScreenScale(targetScale);
-		BerylVector pos   = calcScreenPos(RectStyles.CC);
+		BerylVector pos   = calcScreenPos(RectStyle.CC);
 		return  (point.x < pos.x + scale.x/2) &&
 				(point.x > pos.x - scale.x/2) &&
 				(point.y < pos.y + scale.y/2) &&

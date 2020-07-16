@@ -1,14 +1,14 @@
-package renderEngine.skybox;
+package renderEngine.renderers;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import meshCreation.Loader;
 import models.components.renderable.CameraRC;
 import models.components.renderable.SkyboxRC;
 import models.data.ModelData;
-import renderEngine.Loader;
 import renderEngine.models.LookupTable;
 import renderEngine.models.RawModel;
 import renderEngine.shaders.SkyboxShader;
@@ -46,22 +46,14 @@ public class SkyboxRenderer {
 		shader.loadViewMatrix(cam.getPos(),cam.getRot());
 		shader.loadFogColor(sky.getColor());
 		shader.loadFogLimits(sky.getLower(), sky.getUpper());
-		GL30.glBindVertexArray(cube.getVaoID());
-		GL20.glEnableVertexAttribArray(0);
-		bindTextures(LookupTable.getTexture(sky.getCubeMap1()).getTextureID(),LookupTable.getTexture(sky.getCubeMap2()).getTextureID(), sky.getFactor());
+		cube.bind();
+		shader.bindTextures(LookupTable.getTexture(sky.getCubeMap1()).getTextureID(),LookupTable.getTexture(sky.getCubeMap2()).getTextureID(), sky.getFactor());
 		GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, cube.getVertexCount());
 		GL20.glDisableVertexAttribArray(0);
 		GL30.glBindVertexArray(0);
 		shader.unbind();
 	}
-	
-	private void bindTextures(int tex1, int tex2, float factor) {
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex1);
-		GL13.glActiveTexture(GL13.GL_TEXTURE1);
-		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, tex2);
-		shader.loadBlendFactor(factor);
-	}
+
 	
 	public void setProjectionMatrix(BerylMatrix projectionMatrix) {
 		shader.bind();

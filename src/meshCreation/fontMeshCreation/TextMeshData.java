@@ -1,4 +1,4 @@
-package renderEngine.fontMeshCreator;
+package meshCreation.fontMeshCreation;
 
 /**
  * Stores the vertex data for all the quads on which a text will be rendered.

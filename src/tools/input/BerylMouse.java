@@ -7,7 +7,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
-import renderEngine.BerylDisplay;
+import tools.BerylDisplay;
 import tools.math.BerylMath;
 import tools.math.BerylMatrix;
 import tools.math.BerylVector;
@@ -19,6 +19,9 @@ public class BerylMouse {
 	
 	private static BerylVector camPos;
 	private static BerylVector camRot;
+	
+	private static BerylVector rectSize;
+	private static BerylVector rectPos;
 	
 	private static boolean[] buttonsUp = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];
 	private static boolean[] buttonsHeld = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];
@@ -33,19 +36,15 @@ public class BerylMouse {
 	public static void init(BerylMatrix projectionMatrix, BerylVector pos, BerylVector rot) {
 		camPos = pos;
 		camRot = rot;
-		
-		
+		rectSize = BerylVector.one(2);
+		rectPos = BerylVector.zero();
 		initMouseCallbacks();
-		
-		
 	}
 
 
 	public static void update() {
-
 		updateMousePos();
-		
-		currentScreenRay = BerylMath.getNDC(glfwMousePos.x, BerylDisplay.HEIGHT-glfwMousePos.y);
+		currentScreenRay = BerylMath.getNDC(glfwMousePos.x, BerylDisplay.HEIGHT-glfwMousePos.y).sub(rectPos).div(rectSize);
 		currentRay = BerylMath.calculateRay(currentScreenRay, camPos, camRot);
 	}
 	
@@ -66,13 +65,12 @@ public class BerylMouse {
 	}
 	
 	
-	
 	public static float getDX() {
-		return glfwMousePos.x - lastGLFWMousePos.x;
+		return (glfwMousePos.x - lastGLFWMousePos.x) / rectSize.x ;
 	}
 	
 	public static float getDY() {
-		return glfwMousePos.y - lastGLFWMousePos.y;
+		return (glfwMousePos.y - lastGLFWMousePos.y) / rectSize.y;
 	}
 	
 	public static float getScrollAmount() {
@@ -124,6 +122,38 @@ public class BerylMouse {
 			buttonsDown[i] = false;
 		}
 		scrollAmount = 0;
+	}
+
+
+	/**
+	 * @return the screenSize
+	 */
+	public static BerylVector getRectSize() {
+		return rectSize;
+	}
+
+
+	/**
+	 * @param screenSize the screenSize to set
+	 */
+	public static void setRectSize(BerylVector screenSize) {
+		BerylMouse.rectSize = screenSize;
+	}
+
+
+	/**
+	 * @return the screenPos
+	 */
+	public static BerylVector getRectPos() {
+		return rectPos;
+	}
+
+
+	/**
+	 * @param screenPos the screenPos to set
+	 */
+	public static void setRectPos(BerylVector screenPos) {
+		BerylMouse.rectPos = screenPos;
 	}
 	
 }
