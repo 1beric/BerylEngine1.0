@@ -2,7 +2,6 @@ package renderEngine.postProcessing.bloom;
 
 import org.lwjgl.opengl.GL13;
 
-import models.data.Entity;
 import renderEngine.models.Texture;
 import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
@@ -26,24 +25,20 @@ public class CombineEffect extends PostProcessingEffect {
 	public void loadUniforms(ShaderProgram shader) { }
 
 	@Override
-	public Texture render(Texture tex) {
-		return null;
-	}
-	
-	public Texture render(Texture scene, Texture highlights) {
+	public Texture[] render(Texture[] texsO) {
 		getShader().bind();
-		
+		Texture[] texs = texsO.clone();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		scene.bind();
+		texs[0].bind();
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
-		highlights.bind();
+		texs[1].bind();
 		
 		((CombineShader)getShader()).loadBloomFactor(bloomAmount);
 		
-		Texture out = getRenderer().render();
+		texs[0] = getRenderer().render();
 		
 		getShader().unbind();
-		return out;
+		return texs;
 	}
 
 	/**

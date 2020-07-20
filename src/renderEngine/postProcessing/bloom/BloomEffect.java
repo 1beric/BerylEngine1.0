@@ -2,7 +2,6 @@ package renderEngine.postProcessing.bloom;
 
 import models.data.Entity;
 import renderEngine.models.Texture;
-import renderEngine.postProcessing.ImageRenderer;
 import renderEngine.postProcessing.PostProcessingEffect;
 import renderEngine.postProcessing.gaussianBlur.CompoundGaussianBlur;
 import renderEngine.shaders.ShaderProgram;
@@ -24,13 +23,12 @@ public class BloomEffect extends PostProcessingEffect {
 	public void loadUniforms(ShaderProgram shader) { }
 
 	@Override
-	public Texture render(Texture tex) {
-
-		Texture highlights = brighten.render(tex);
-		highlights = blur.render(highlights);
-		Texture bloomed = combine.render(tex, highlights);
+	public Texture[] render(Texture[] texsO) {
+		Texture[] texs = texsO.clone();
+		texs[1] = blur.render(new Texture[] {texs[1], null})[0];
+		texs = combine.render(texs);
 		
-		return bloomed;
+		return texs;
 	}
 
 	@Override

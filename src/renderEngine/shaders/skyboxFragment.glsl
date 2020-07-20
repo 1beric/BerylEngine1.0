@@ -22,7 +22,7 @@ void main(void){
 
 	float brightness = (out_Color.r * 0.2126) + (out_Color.g * 0.7152) + (out_Color.b * 0.0722);
 	if (brightness > 0.7) {
-		out_BrightColor = vec4(1.0);
+		out_BrightColor = out_Color;
 	} else {
 		out_BrightColor = vec4(0.0);
 	}

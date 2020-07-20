@@ -37,18 +37,18 @@ public class GUIRenderer {
 		this.fbo = new FrameBuffer(DepthBuffer.DEPTH_RENDER_BUFFER, false);
 	}
 	
-	public Texture render(List<Mesh2RC> meshes, Texture[] scene) {
+	public Texture render(List<Mesh2RC> meshes, Texture scene) {
 		fbo.bind();
 		
 		imageShader.bind();
 		BerylGL.clear();
 		BerylGL.enableBlending();
 		BerylGL.disableDepthTest();
-		imageShader.loadTexture(scene[0]);
+		imageShader.loadTexture(scene);
 		MODEL.bind();
 		MODEL.draw();
 		MODEL.unbind();
-		scene[0].unbind();
+		scene.unbind();
 		imageShader.unbind();
 		
 		shader.bind();

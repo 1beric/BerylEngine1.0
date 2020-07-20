@@ -54,11 +54,11 @@ public class Texture {
 	}
 
 
-	private String file;
+	private String name;
 	private int textureID;
 	
 	public Texture(String file) {
-		this.setFile(file);
+		this.setName(file);
 		
 		// GPU bound
 		textureID = GL11.glGenTextures();
@@ -94,7 +94,7 @@ public class Texture {
 	}
 	
 	public Texture(String file, int texID) {
-		setFile(file);
+		setName(file);
 		this.textureID = texID;
 	}
 	
@@ -109,15 +109,15 @@ public class Texture {
 	/**
 	 * @return the file
 	 */
-	public String getFile() {
-		return file;
+	public String getName() {
+		return name;
 	}
 
 	/**
 	 * @param file the file to set
 	 */
-	public void setFile(String file) {
-		this.file = file;
+	public void setName(String file) {
+		this.name = file;
 	}
 
 	/**
@@ -127,6 +127,8 @@ public class Texture {
 		return textureID;
 	}
 
-	
+	public Texture copy() {
+		return new Texture(name, textureID);
+	}
 	
 }

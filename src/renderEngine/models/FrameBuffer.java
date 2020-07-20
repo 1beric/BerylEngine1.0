@@ -1,9 +1,12 @@
 package renderEngine.models;
 
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
 
@@ -19,21 +22,25 @@ public class FrameBuffer {
 	}
 	
 	private Texture tex;
+	private Texture tex1;
 	private Texture depth;
 	private int frameBuffer;
 	private DepthBuffer dbType;
 	
 	private int width;
 	private int height;
-	private boolean multisample;
+	private boolean multisampleAndMultiTarget;
 	
 	public FrameBuffer(DepthBuffer dbType, boolean multisample) {
 		this.width = BerylDisplay.WIDTH;
 		this.height = BerylDisplay.HEIGHT;
 		this.dbType = dbType;
-		this.multisample = multisample;
+		this.multisampleAndMultiTarget = multisample;
 		frameBuffer = createFrameBuffer();
-		tex = createTextureAttachment();
+		if (multisampleAndMultiTarget) {
+			tex = createMultisampleTextureAttachment(GL30.GL_COLOR_ATTACHMENT0);
+			tex1 = createMultisampleTextureAttachment(GL30.GL_COLOR_ATTACHMENT1);
+		} else tex = createTextureAttachment();
 		switch (dbType) {
 		case DEPTH_RENDER_BUFFER:
 			depth = createDepthBufferAttachment();
@@ -52,11 +59,21 @@ public class FrameBuffer {
 		this.height = (int)(BerylDisplay.HEIGHT * scale);
 		this.dbType = dbType;
 		frameBuffer = createFrameBuffer();
-		if (multisample) tex = createMultisampleTextureAttachment();
-		else			 tex = createTextureAttachment();
+		tex = createTextureAttachment();
 		if (dbType == DepthBuffer.DEPTH_RENDER_BUFFER) depth = createDepthBufferAttachment();
 		else if (dbType == DepthBuffer.DEPTH_TEXTURE)  depth = createDepthTextureAttachment();
 		unbind();
+	}
+	
+	public void resolve(int readBuffer, FrameBuffer resolveTo) {
+		GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, resolveTo.frameBuffer);
+		GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, this.frameBuffer);
+		GL11.glReadBuffer(readBuffer);
+		GL30.glBlitFramebuffer(0, 0, width, height, 
+				0, 0, resolveTo.width, resolveTo.height, 
+				GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT, 
+				GL11.GL_NEAREST);
+		this.unbind();
 	}
 	
 	public void resolve(FrameBuffer resolveTo) {
@@ -78,6 +95,14 @@ public class FrameBuffer {
 				GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT, 
 				GL11.GL_NEAREST);
 		this.unbind();
+	}
+	
+	public void determineDrawBuffers() {
+		IntBuffer bufs = BufferUtils.createIntBuffer(2);
+		bufs.put(GL30.GL_COLOR_ATTACHMENT0);
+		if (multisampleAndMultiTarget) bufs.put(GL30.GL_COLOR_ATTACHMENT1);
+		bufs.flip();
+		GL20.glDrawBuffers(bufs);
 	}
 	
 	public void bind() {
@@ -113,7 +138,7 @@ public class FrameBuffer {
 	private int createFrameBuffer() {
 		int i = GL30.glGenFramebuffers();
 		GL30.glBindFramebuffer(GL30.GL_FRAMEBUFFER, i);
-		GL11.glDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
+		determineDrawBuffers();
 		return i;
 	}
 	
@@ -129,11 +154,11 @@ public class FrameBuffer {
 		return new Texture("FBO", texture);
 	}
 	
-	private Texture createMultisampleTextureAttachment() {
+	private Texture createMultisampleTextureAttachment(int attachment) {
 		int buffer = GL30.glGenRenderbuffers();
 		GL30.glBindRenderbuffer(GL30.GL_RENDERBUFFER, buffer);
 		GL30.glRenderbufferStorageMultisample(GL30.GL_RENDERBUFFER, SAMPLES, GL11.GL_RGBA8, width, height);
-		GL30.glFramebufferRenderbuffer(GL30.GL_FRAMEBUFFER, GL30.GL_COLOR_ATTACHMENT0,
+		GL30.glFramebufferRenderbuffer(GL30.GL_FRAMEBUFFER, attachment,
 				GL30.GL_RENDERBUFFER, buffer);
 		return new Texture("col", buffer);
 	}
@@ -153,7 +178,7 @@ public class FrameBuffer {
 	private Texture createDepthBufferAttachment() {
 		int depthBuffer = GL30.glGenRenderbuffers();
 		GL30.glBindRenderbuffer(GL30.GL_RENDERBUFFER, depthBuffer);
-		if (multisample) {
+		if (multisampleAndMultiTarget) {
 			GL30.glRenderbufferStorageMultisample(GL30.GL_RENDERBUFFER, SAMPLES, GL11.GL_DEPTH_COMPONENT, width, height);
 		} else {
 			GL30.glRenderbufferStorage(GL30.GL_RENDERBUFFER, GL11.GL_DEPTH_COMPONENT, width, height);
@@ -167,6 +192,7 @@ public class FrameBuffer {
 	public void cleanUp() {//call when closing the game
 		GL30.glDeleteFramebuffers(frameBuffer);
 		GL11.glDeleteTextures(tex.getTextureID());
+		if (multisampleAndMultiTarget) GL11.glDeleteTextures(tex1.getTextureID());
 		if (dbType == DepthBuffer.DEPTH_RENDER_BUFFER) 	GL30.glDeleteRenderbuffers(depth.getTextureID());
 		if (dbType == DepthBuffer.DEPTH_TEXTURE)		GL30.glDeleteTextures(depth.getTextureID());
 	}

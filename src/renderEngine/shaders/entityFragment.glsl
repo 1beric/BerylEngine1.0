@@ -62,9 +62,9 @@ void main(void) {
 	out_Color = vec4(totalDiffuse,1.0) * textureColor + vec4(totalSpecular,1.0);
 
 
-	float brightness = (out_Color.r * 0.2126) + (out_Color.g * 0.7152) + (out_Color.b * 0.0722);
-	if (brightness > 0.7 || mapInfo.g) {
-		out_BrightColor = vec4(1.0);
+	float obrightness = (out_Color.r * 0.2126) + (out_Color.g * 0.7152) + (out_Color.b * 0.0722);
+	if (obrightness > 0.7 || out_BrightColor.r > 0.1) {
+		out_BrightColor = out_Color;
 	}
 
 }

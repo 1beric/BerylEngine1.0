@@ -24,9 +24,10 @@ public class CompoundGaussianBlur extends PostProcessingEffect {
 	public void loadUniforms(ShaderProgram shader) { }
 
 	@Override
-	public Texture render(Texture tex) {
-		for (GaussianBlur blur : blurs) tex = blur.render(tex);
-		return tex;
+	public Texture[] render(Texture[] texsO) {
+		Texture[] texs = texsO.clone();
+		for (GaussianBlur blur : blurs) texs = blur.render(texs);
+		return texs;
 	}
 
 	@Override

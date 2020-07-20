@@ -20,15 +20,15 @@ public abstract class PostProcessingEffect extends BerylRC {
 	
 	public abstract void loadUniforms(ShaderProgram shader);
 	
-	public Texture render(Texture tex) {
+	public Texture[] render(Texture[] texsO) {
+		Texture[] texs = texsO.clone();
 		shader.bind();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		tex.bind();
+		texs[0].bind();
 		loadUniforms(shader);
-		Texture out = renderer.render();
-		tex.unbind();
+		texs[0] = renderer.render();
 		shader.unbind();
-		return out;
+		return texs;
 	}
 	
 	public ShaderProgram getShader() {

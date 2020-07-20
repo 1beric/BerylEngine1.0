@@ -20,9 +20,10 @@ public class GaussianBlur extends PostProcessingEffect {
 	public void loadUniforms(ShaderProgram shader) { }
 
 	@Override
-	public Texture render(Texture tex) {
-		Texture blurredH = horizontalGaussianBlur.render(tex);
-		return verticalGaussianBlur.render(blurredH);
+	public Texture[] render(Texture[] texsO) {
+		Texture[] texs = texsO.clone();
+		texs = horizontalGaussianBlur.render(texs);
+		return verticalGaussianBlur.render(texs);
 	}
 
 	@Override

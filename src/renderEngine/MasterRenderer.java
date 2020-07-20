@@ -1,5 +1,7 @@
 package renderEngine;
 
+import org.lwjgl.opengl.GL30;
+
 import editor.GameView;
 import models.Scene;
 import renderEngine.models.FrameBuffer;
@@ -34,7 +36,8 @@ public class MasterRenderer {
 	private static BerylMatrix projectionMatrix;
 	
 	private static FrameBuffer fboMS;
-	private static FrameBuffer fbo;
+	private static FrameBuffer fboScene;
+	private static FrameBuffer fboHighlights;
 	
 	public static void init() {
 		projectionMatrix		= BerylMath.getProjectionMatrix();
@@ -45,7 +48,8 @@ public class MasterRenderer {
 		windowRenderer 			= new WindowRenderer();
 		
 		fboMS = new FrameBuffer(DepthBuffer.DEPTH_RENDER_BUFFER, true);
-		fbo = new FrameBuffer(DepthBuffer.DEPTH_TEXTURE, false);
+		fboScene = new FrameBuffer(DepthBuffer.DEPTH_TEXTURE, false);
+		fboHighlights = new FrameBuffer(DepthBuffer.DEPTH_TEXTURE, false);
 	}
 	
 	/**
@@ -53,11 +57,11 @@ public class MasterRenderer {
 	 * @param scene
 	 */
 	public static Texture render(Scene scene) {
-		Texture[] sceneImage = renderScene(scene);
+		Texture sceneImage = renderScene(scene);
 		return guiRenderer.render(scene.getMesh2RCs(), sceneImage);
 	}
 	
-	private static Texture[] renderScene(Scene scene) {
+	private static Texture renderScene(Scene scene) {
 		fboMS.bind();
 		BerylGL.enableDepthTest();
 		BerylGL.enableCulling();
@@ -66,8 +70,9 @@ public class MasterRenderer {
 		skyboxRenderer.render(scene.getCam(),scene.getSky());
 		entityRenderer.render(scene.getMesh3RCs(),scene.getLight(),scene.getCam());
 		fboMS.unbind();
-		fboMS.resolve(fbo);
-		return postProcessor.render(fbo.getTexture(), scene.getPostProcessingEffects());
+		fboMS.resolve(GL30.GL_COLOR_ATTACHMENT0, fboScene);
+		fboMS.resolve(GL30.GL_COLOR_ATTACHMENT1, fboHighlights);
+		return postProcessor.render(new Texture[] { fboScene.getTexture(), fboHighlights.getTexture() }, scene.getPostProcessingEffects());
 	}
 	
 	/**
@@ -82,7 +87,8 @@ public class MasterRenderer {
 		guiRenderer.cleanUp();
 		windowRenderer.cleanUp();
 		fboMS.cleanUp();
-		fbo.cleanUp();
+		fboScene.cleanUp();
+		fboHighlights.cleanUp();
 	}
 
 	public static BerylMatrix getProjectionMatrix() {

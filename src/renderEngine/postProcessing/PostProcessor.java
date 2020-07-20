@@ -21,14 +21,14 @@ public class PostProcessor {
 				2));
 	}
 	
-	public Texture render(Texture tex, List<PostProcessingEffect> effects) {
+	public Texture render(Texture[] texsO, List<PostProcessingEffect> effects) {
 		start();
-		
+		Texture[] texs = texsO.clone();
 		// render effects in order
-		for (PostProcessingEffect effect : effects) tex = effect.render(tex);
+		for (PostProcessingEffect effect : effects) texs = effect.render(texs);
 		
 		end();
-		return tex;
+		return texs[0];
 	}
 	
 	private void start() {
